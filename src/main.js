@@ -4,7 +4,11 @@ import router from './router'
 import store from './store'
 import './plugins/element.js'
 import 'lib-flexible'
-import * as echarts from './echarts.js'
+import echarts from 'echarts'
+import Element from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css';
+
+Vue.use(Element)
 //引入组件
 Vue.prototype.$echarts = echarts
 Vue.config.productionTip = false

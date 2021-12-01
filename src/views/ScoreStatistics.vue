@@ -245,13 +245,11 @@ export default {
       ],
     };
   },
-  mounted() {
-    this.drawLine();
-  },
+
   methods: {
     drawLine() {
       // 基于准备好的dom，初始化echarts实例
-      var pieChart = this.$echarts.init(document.getElementById("pieChart"));
+      let pieChart = this.$echarts.init(document.getElementById("pieChart"))
       // 绘制图表
       pieChart.setOption({
         title: {
@@ -302,7 +300,8 @@ export default {
             },
           },
         ],
-      });
+      })
+
     },
     //设置表头行的样式
     tableHeaderColor({ row, column, rowIndex, columnIndex }) {
@@ -312,6 +311,9 @@ export default {
     tableRowStyle({ row, rowIndex }) {
       return "background-color:pink;font-size:15px;text-align:center";
     },
+  },
+  mounted() {
+    this.drawLine();
   },
 };
 </script>
