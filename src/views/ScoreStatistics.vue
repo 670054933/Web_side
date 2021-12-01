@@ -3,7 +3,7 @@
     <!--侧边栏-->
     <el-aside width="200px">
       <div class="avater_box">
-        <img src="../image/头像.png" alt="" />
+        <img src="@/image/头像.png" alt="" />
       </div>
       <!--侧边栏菜单区-->
       <el-menu
@@ -164,7 +164,7 @@
 
 <script>
 export default {
-  name: "eCharts",
+  name: "ScoreStatistics",
   data() {
     return {
       // msg: "Welcome to Your Vue.js App",
