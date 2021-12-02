@@ -67,8 +67,36 @@
             </el-dropdown>
           </div>
         </div>
-        <div style="float: left">
-         alsjdflkjsadlkfjlksajdflkjsaljflsajflkj
+
+        <!-- 饼状分析图 -->
+        <div id="pieChart" >
+        </div>
+
+        <!--表格-->
+        <div id="scoreTable">
+          <el-table
+              :data="tableData"
+              border
+              stripe
+              :row-style="tableRowStyle"
+              :header-cell-style="tableHeaderColor"
+              style="width: 100%"
+          ><!--stripe表示斑马纹;header-row-style表头行的 style 的回调方法;row-style 行的 style 的回调方法-->
+
+            <el-table-column prop="name" label="Name" width="120" />
+            <el-table-column prop="studentID" label="StudentID" width="120" />
+            <el-table-column prop="chinese" label="Chinese" width="120" />
+            <el-table-column prop="maths" label="Maths" width="120" />
+            <el-table-column prop="english" label="English" width="120" />
+            <el-table-column prop="chemistry" label="Chemistry" width="120" />
+            <el-table-column prop="physics" label="Physics" width="120" />
+            <el-table-column prop="biology" label="Biology" width="120" />
+            <el-table-column prop="sum" label="Sum" width="120" />
+            <el-table-column
+                prop="classRanking"
+                label="Class Ranking"
+            />
+          </el-table>
         </div>
       </div>
     </div>
@@ -240,12 +268,12 @@ export default {
   height: 100%;
 }
 .right{
-   width: 1303.2px;
+  width: 1303.2px;
   float: left;
  }
 .main{
   width: 100%;
-  display: flex;
+  //display: flex;
   height: 700px;
 }
 .avater_box {
@@ -288,10 +316,13 @@ export default {
 #pieChart {
   width: 600px;
   height: 460px;
-  margin: 0;
-  padding: 0;
+  margin: 20px 100px 20px 100px;
+  padding: 30px 20px 10px 20px; //上右下左
   float: left;
-  display: flex;
+  //display: flex;
+}
+#scoreTable{
+  margin: 5px 20px;
 }
 .score{
   display: inline-block;
