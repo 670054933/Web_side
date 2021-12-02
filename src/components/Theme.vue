@@ -16,7 +16,7 @@
             <span>Home Page</span>
           </template>
         </el-menu-item>
-        <el-menu-item index="/ScoreStatistics">
+        <el-menu-item index="/ScoreReport">
           <template #title>
             <i class="el-icon-s-order"></i>
             <span>Score Report</span>

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import login from '@/views/login.vue'
 import Home from '@/views/Home.vue'
-import ScoreStatistics from '@/views/ScoreStatistics.vue'
+import ScoreReport from '@/views/ScoreReport.vue'
 import HomePage from '@/views/HomePage'
 import SchoolAssignment from "@/views/SchoolAssignment";
 import Communicate from '@/views/Communicate'
@@ -44,9 +44,9 @@ export default new Router({
     // },
     {
       //成绩报告
-      path:'/ScoreStatistics',
-      component: ScoreStatistics,
-      name:'ScoreStatistics',
+      path:'/ScoreReport',
+      component: ScoreReport,
+      name:'ScoreReport',
     },
     {
       path:'/SchoolAssignment',

@@ -12,7 +12,7 @@
 
 <script>
 import Theme from "@/components/Theme";
-import Header from "@/components/Header";
+import Header from "@/components/Headers";
 export default {
   name: "SchoolAssignment",
   components: {Theme,Header},

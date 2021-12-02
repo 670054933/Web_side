@@ -1,67 +1,11 @@
 <template>
-  <el-container class="home-container">
-    <!--侧边栏-->
-    <el-aside width="200px">
-      <div class="avater_box">
-        <img src="@/image/头像.png" alt="" />
-      </div>
-      <!--侧边栏菜单区-->
-      <el-menu
-        active-text-color="#ffd04b"
-        background-color="#656161"
-        text-color="#faf4f4"
-      >
-        <!--一级菜单-->
-        <el-menu-item index="1">
-          <!--一级菜单的模板区-->
-          <template #title>
-            <!--图标-->
-            <!--改变图标颜色 style="color:#ffd04b"-->
-            <i class="el-icon-s-home"></i>
-            <!--文本-->
-            <span>Home Page</span>
-          </template>
-        </el-menu-item>
-
-        <el-menu-item index="2">
-          <template #title>
-            <i class="el-icon-s-order"></i>
-            <span>Score Report</span>
-          </template>
-        </el-menu-item>
-
-        <el-menu-item index="3">
-          <i class="el-icon-reading"></i>
-          <span>School Assignment</span>
-        </el-menu-item>
-
-        <el-menu-item index="4">
-          <i class="el-icon-chat-line-round"></i>
-          <span>Communicate</span>
-        </el-menu-item>
-
-        <el-menu-item index="5">
-          <i class="el-icon-s-custom"></i>
-          <span>Information</span>
-        </el-menu-item>
-      </el-menu>
-    </el-aside>
-    <!--主体区-->
-    <el-container>
-      <!--头部区-->
-      <el-header>
-        <el-button
-          icon="el-icon-switch-button"
-          circle
-          style="color: red; background-color: #c3c2c2"
-        ></el-button>
-      </el-header>
-      <!--右侧内容主体-->
-      <el-main>
-        <!--选择栏-->
-        <el-row class="block-col-4" justify="center">
-          <!--Score-->
-          <el-col :span="6">
+  <div>
+    <Theme></Theme>
+    <div class="right">
+      <Header></Header>
+      <div class="main">
+        <div class="block-col-4">
+          <div class="score">
             <el-dropdown trigger="click">
               <el-button class="choose">
                 Score<i class="el-icon-arrow-down el-icon--right"></i>
@@ -78,10 +22,8 @@
                 </el-dropdown-menu>
               </template>
             </el-dropdown>
-          </el-col>
-
-          <!--Term-->
-          <el-col :span="6">
+          </div>
+          <div class="term">
             <el-dropdown trigger="click">
               <el-button class="choose">
                 Term<i class="el-icon-arrow-down el-icon--right"></i>
@@ -95,10 +37,8 @@
                 </el-dropdown-menu>
               </template>
             </el-dropdown>
-          </el-col>
-
-          <!--Test-->
-          <el-col :span="6">
+          </div>
+          <div class="test">
             <el-dropdown trigger="click">
               <el-button class="choose">
                 Test<i class="el-icon-arrow-down el-icon--right"></i>
@@ -112,10 +52,8 @@
                 </el-dropdown-menu>
               </template>
             </el-dropdown>
-          </el-col>
-
-          <!--Class-->
-          <el-col :span="6">
+          </div>
+          <div class="classes">
             <el-dropdown trigger="click">
               <el-button class="choose">
                 Class<i class="el-icon-arrow-down el-icon--right"></i>
@@ -127,44 +65,22 @@
                 </el-dropdown-menu>
               </template>
             </el-dropdown>
-          </el-col>
-        </el-row>
-
-        <!-- 饼状分析图 -->
-        <div id="pieChart" :style="{ width: '600px', height: '460px' }"></div>
-
-        <!--表格-->
-        <el-table
-          :data="tableData"
-          border
-          stripe
-          :header-cell-style="tableHeaderColor"
-          style="width: 100%"
-          ><!--stripe表示斑马纹;header-row-style表头行的 style 的回调方法;row-style 行的 style 的回调方法-->
-
-          <el-table-column prop="name" label="Name" width="120" />
-          <el-table-column prop="studentID" label="StudentID" width="120" />
-          <el-table-column prop="chinese" label="Chinese" width="120" />
-          <el-table-column prop="maths" label="Maths" width="120" />
-          <el-table-column prop="english" label="English" width="120" />
-          <el-table-column prop="chemistry" label="Chemistry" width="120" />
-          <el-table-column prop="physics" label="Physics" width="120" />
-          <el-table-column prop="biology" label="Biology" width="120" />
-          <el-table-column prop="sum" label="Sum" width="120" />
-          <el-table-column
-            prop="classRanking"
-            label="Class Ranking"
-            width="120"
-          />
-        </el-table>
-      </el-main>
-    </el-container>
-  </el-container>
+          </div>
+        </div>
+        <div style="float: left">
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
+import Theme from "@/components/Theme";
+import Header from "@/components/Headers";
+
 export default {
-  name: "ScoreStatistics",
+  name: "ScoreReport",
+  components: {Header, Theme},
   data() {
     return {
       // msg: "Welcome to Your Vue.js App",
@@ -275,10 +191,10 @@ export default {
 
             //数据
             data: [
-              { value: 1048, name: "A(85-100)" },
-              { value: 735, name: "B(70-84)" },
-              { value: 580, name: "C(60-69)" },
-              { value: 484, name: "D(0-59)" },
+              {value: 1048, name: "A(85-100)"},
+              {value: 735, name: "B(70-84)"},
+              {value: 580, name: "C(60-69)"},
+              {value: 484, name: "D(0-59)"},
             ],
             //高亮状态的扇区和标签样式。
             emphasis: {
@@ -304,11 +220,11 @@ export default {
 
     },
     //设置表头行的样式
-    tableHeaderColor({ row, column, rowIndex, columnIndex }) {
+    tableHeaderColor({row, column, rowIndex, columnIndex}) {
       return "background-color:#e5e3e1;color:#3f3e3d;font-wight:500;font-size:30;text-align:center";
     },
     //设置表格行的样式
-    tableRowStyle({ row, rowIndex }) {
+    tableRowStyle({row, rowIndex}) {
       return "background-color:pink;font-size:15px;text-align:center";
     },
   },
@@ -322,19 +238,15 @@ export default {
 .home-container {
   height: 100%;
 }
-.el-aside {
-  background-color: #656161;
-  height: auto;
+.right{
+  float: left;
+  width: 80%;
 }
-.el-header {
-  background-color: #c3c2c2;
+.main{
+  width: 100%;
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-.el-main {
-  background-color: #fdfcfb;
-  height: 100%;
+  height: 700px;
+  float: left;
 }
 .avater_box {
   height: 80px;
@@ -355,7 +267,8 @@ export default {
 }
 
 .block-col-4 {
-  margin-left: 100px;
+  width: 100%;
+  height: 50px;
 }
 
 .choose {
@@ -373,7 +286,31 @@ export default {
 }
 
 #pieChart {
-  margin: 50px 100px 40px 100px;
-  padding: 50px 20px 10px 20px; //上右下左
+  width: 600px;
+  height: 460px;
+  margin: 0;
+  padding: 0;
+  float: left;
+  display: flex;
+}
+.score{
+  display: inline-block;
+  float: left;
+  margin-left: 100px;
+}
+.term{
+  display: inline-block;
+  float: left;
+  margin-left: 100px;
+}
+.test{
+  display: inline-block;
+  float: left;
+  margin-left: 100px;
+}
+.classes{
+  display: inline-block;
+  float: left;
+  margin-left: 100px;
 }
 </style>

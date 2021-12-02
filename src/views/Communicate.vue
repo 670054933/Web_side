@@ -12,7 +12,7 @@
 
 <script>
 import Theme from "@/components/Theme";
-import Header from "@/components/Header";
+import Header from "@/components/Headers";
 export default {
   name: "Communicate",
   components: {Theme,Header},
@@ -20,8 +20,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.right{
-  width: 86%;
-  float: left;
-}
+//.right{
+//  width: 86%;
+//  float: left;
+//}
 </style>

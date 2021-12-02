@@ -3,14 +3,14 @@
     <el-button
         icon="el-icon-switch-button"
         circle
-        style="color: red; background-color: #c3c2c2"
+        style="color: red;"
     ></el-button>
   </el-header>
 </template>
 
 <script>
 export default {
-  name: "header"
+  name: "Headers"
 }
 </script>
 
