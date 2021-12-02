@@ -68,6 +68,7 @@
           </div>
         </div>
         <div style="float: left">
+         alsjdflkjsadlkfjlksajdflkjsaljflsajflkj
         </div>
       </div>
     </div>
@@ -239,14 +240,13 @@ export default {
   height: 100%;
 }
 .right{
+   width: 1303.2px;
   float: left;
-  width: 80%;
-}
+ }
 .main{
   width: 100%;
   display: flex;
   height: 700px;
-  float: left;
 }
 .avater_box {
   height: 80px;
