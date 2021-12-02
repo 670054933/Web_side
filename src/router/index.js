@@ -1,21 +1,17 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import login from '@/views/login.vue'
+import Home from '@/views/Home.vue'
+import ScoreStatistics from '@/views/ScoreStatistics.vue'
 import HomePage from '@/views/HomePage'
+import SchoolAssignment from "@/views/SchoolAssignment";
 import Communicate from '@/views/Communicate'
 import Information from '@/views/Information'
 import register from '@/views/2.vue'
-import ScoreStatistics from '@/views/ScoreStatistics.vue'
-import Home from '@/views/Home.vue'
+
+
 Vue.use(Router)
 
-// const routes = [
-//   {
-//     path: '/',
-//     name: 'login',
-//     component: login
-//   }
-// ]
 export default new Router({
   // mode:'history',
   // scrollBehavior:() => ({
@@ -36,15 +32,26 @@ export default new Router({
     },
     {
       //主页
-      path:'/HomePage',
-      component: HomePage,
-      name:'HomePage',
+      path: '/Home',
+      component:Home,
+      name: 'Home',
     },
+    // {
+    //   //主页
+    //   path:'/HomePage',
+    //   component: HomePage,
+    //   name:'HomePage',
+    // },
     {
       //成绩报告
       path:'/ScoreStatistics',
       component: ScoreStatistics,
       name:'ScoreStatistics',
+    },
+    {
+      path:'/SchoolAssignment',
+      component:SchoolAssignment,
+      name:'SchoolAssignment'
     },
     {
       //交流
@@ -58,11 +65,7 @@ export default new Router({
       component:Information,
       name:'Information'
     },
-    {
-      path: '/Home',
-      name: 'Home',
-      component: require('@/views/Home').default
-    },
+
   ]
 })
 

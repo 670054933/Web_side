@@ -8,36 +8,29 @@
           active-text-color="#ffd04b"
           background-color="#656161"
           text-color="#faf4f4"
+          :router="true"
       >
-        <!--一级菜单-->
-        <el-menu-item index="1">
-          <!--一级菜单的模板区-->
+        <el-menu-item index="/Home">
           <template #title>
-            <!--图标-->
-            <!--改变图标颜色 style="color:#ffd04b"-->
             <i class="el-icon-s-home"></i>
-            <!--文本-->
             <span>Home Page</span>
           </template>
         </el-menu-item>
-
-        <el-menu-item index="2">
+        <el-menu-item index="/ScoreStatistics">
           <template #title>
             <i class="el-icon-s-order"></i>
             <span>Score Report</span>
           </template>
         </el-menu-item>
-
-        <el-menu-item index="3">
+        <el-menu-item index="/SchoolAssignment">
           <i class="el-icon-reading"></i>
           <span>School Assignment</span>
         </el-menu-item>
-
-        <el-menu-item index="4">
+        <el-menu-item index="/Communicate">
           <i class="el-icon-chat-line-round"></i>
           <span>Communicate</span>
         </el-menu-item>
-        <el-menu-item index="5">
+        <el-menu-item index="/Information">
           <i class="el-icon-s-custom"></i>
           <span>Information</span>
         </el-menu-item>
