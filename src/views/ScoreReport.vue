@@ -98,6 +98,9 @@
             />
           </el-table>
         </div>
+
+        <!--弹窗-->
+        <Analysis></Analysis>
       </div>
     </div>
   </div>
@@ -106,10 +109,11 @@
 <script>
 import Theme from "@/components/Theme";
 import Header from "@/components/Headers";
+import Analysis from "@/components/Analysis";
 
 export default {
   name: "ScoreReport",
-  components: {Header, Theme},
+  components: {Header, Theme, Analysis},
   data() {
     return {
       // msg: "Welcome to Your Vue.js App",
