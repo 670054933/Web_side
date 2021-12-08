@@ -4,7 +4,7 @@
 <!--  </el-button>-->
 
   <!--  弹窗-->
-  <el-dialog :visible.sync="show" v-model="dialogFormVisible" title="Personal Analysis">
+  <el-dialog :visible.sync="show"  title="Personal Analysis">
     <div class="name">
       <p>{{ name }}</p>
     </div>
@@ -57,7 +57,7 @@ export default {
   name: "Analysis",
   props: {
     grade:{
-      type:Array,
+      type:Object,
     }
   },
   data() {
