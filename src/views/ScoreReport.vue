@@ -4,72 +4,50 @@
     <div class="right">
       <Header></Header>
       <div class="main">
+        <!--选择栏-->
         <div class="block-col-4">
-          <div class="score">
-            <el-dropdown trigger="click">
-              <el-button class="choose">
-                Score<i class="el-icon-arrow-down el-icon--right"></i>
-              </el-button>
-              <template #dropdown>
-                <el-dropdown-menu class="chosen">
-                  <el-dropdown-item>Total</el-dropdown-item>
-                  <el-dropdown-item>Chinese</el-dropdown-item>
-                  <el-dropdown-item>Maths</el-dropdown-item>
-                  <el-dropdown-item>English</el-dropdown-item>
-                  <el-dropdown-item>Chemistry</el-dropdown-item>
-                  <el-dropdown-item>Physics</el-dropdown-item>
-                  <el-dropdown-item>Biology</el-dropdown-item>
-                </el-dropdown-menu>
-              </template>
-            </el-dropdown>
-          </div>
-          <div class="term">
-            <el-dropdown trigger="click">
-              <el-button class="choose">
-                Term<i class="el-icon-arrow-down el-icon--right"></i>
-              </el-button>
-              <template #dropdown>
-                <el-dropdown-menu class="chosen">
-                  <el-dropdown-item>202102</el-dropdown-item>
-                  <el-dropdown-item>202101</el-dropdown-item>
-                  <el-dropdown-item>202002</el-dropdown-item>
-                  <el-dropdown-item>202001</el-dropdown-item>
-                </el-dropdown-menu>
-              </template>
-            </el-dropdown>
-          </div>
-          <div class="test">
-            <el-dropdown trigger="click">
-              <el-button class="choose">
-                Test<i class="el-icon-arrow-down el-icon--right"></i>
-              </el-button>
-              <template #dropdown>
-                <el-dropdown-menu class="chosen">
-                  <el-dropdown-item>Monthly exam1</el-dropdown-item>
-                  <el-dropdown-item>Midterm exam</el-dropdown-item>
-                  <el-dropdown-item>Monthly exam2</el-dropdown-item>
-                  <el-dropdown-item>Final exam</el-dropdown-item>
-                </el-dropdown-menu>
-              </template>
-            </el-dropdown>
-          </div>
-          <div class="classes">
-            <el-dropdown trigger="click">
-              <el-button class="choose">
-                Class<i class="el-icon-arrow-down el-icon--right"></i>
-              </el-button>
-              <template #dropdown>
-                <el-dropdown-menu class="chosen">
-                  <el-dropdown-item>Class11</el-dropdown-item>
-                  <el-dropdown-item>Class12</el-dropdown-item>
-                </el-dropdown-menu>
-              </template>
-            </el-dropdown>
-          </div>
-        </div>
+          <el-select v-model="value1" filterable placeholder="Score" class="choose">
+            <el-option
+                v-for="item in options1"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+            >
+            </el-option>
+          </el-select>
 
+          <el-select v-model="value2" filterable placeholder="Term" class="choose">
+            <el-option
+                v-for="item in options2"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+            >
+            </el-option>
+          </el-select>
+
+          <el-select v-model="value3" filterable placeholder="Test" class="choose">
+            <el-option
+                v-for="item in options3"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+            >
+            </el-option>
+          </el-select>
+
+          <el-select v-model="value4" filterable placeholder="Class" class="choose">
+            <el-option
+                v-for="item in options4"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+            >
+            </el-option>
+          </el-select>
+        </div>
         <!-- 饼状分析图 -->
-        <div id="pieChart" >
+        <div id="pieChart">
         </div>
 
         <!--表格-->
@@ -83,21 +61,24 @@
               style="width: 100%"
           ><!--stripe表示斑马纹;header-row-style表头行的 style 的回调方法;row-style 行的 style 的回调方法-->
 
-            <el-table-column prop="name" label="Name" width="120" />
-            <el-table-column prop="studentID" label="StudentID" width="120" />
-            <el-table-column prop="chinese" label="Chinese" width="120" />
-            <el-table-column prop="maths" label="Maths" width="120" />
-            <el-table-column prop="english" label="English" width="120" />
-            <el-table-column prop="chemistry" label="Chemistry" width="120" />
-            <el-table-column prop="physics" label="Physics" width="120" />
-            <el-table-column prop="biology" label="Biology" width="120" />
-            <el-table-column prop="sum" label="Sum" width="120" />
+            <el-table-column prop="name" label="Name" width="120"/>
+            <el-table-column prop="studentID" label="StudentID" width="120"/>
+            <el-table-column prop="chinese" label="Chinese" width="120"/>
+            <el-table-column prop="maths" label="Maths" width="120"/>
+            <el-table-column prop="english" label="English" width="120"/>
+            <el-table-column prop="chemistry" label="Chemistry" width="120"/>
+            <el-table-column prop="physics" label="Physics" width="120"/>
+            <el-table-column prop="biology" label="Biology" width="120"/>
+            <el-table-column prop="sum" label="Sum" width="120"/>
             <el-table-column
                 prop="classRanking"
                 label="Class Ranking"
             />
           </el-table>
         </div>
+
+        <!--弹窗-->
+        <Analysis></Analysis>
       </div>
     </div>
   </div>
@@ -106,13 +87,95 @@
 <script>
 import Theme from "@/components/Theme";
 import Header from "@/components/Headers";
+import Analysis from "@/components/Analysis";
 
 export default {
   name: "ScoreReport",
-  components: {Header, Theme},
+  components: {Header, Theme, Analysis},
   data() {
     return {
       // msg: "Welcome to Your Vue.js App",
+      //选择栏选项数据
+      options1: [
+        {
+          value: "option1",
+          label: "Total",
+        },
+        {
+          value: "option2",
+          label: "Chinese",
+        },
+        {
+          value: "option3",
+          label: "Maths",
+        },
+        {
+          value: "option4",
+          label: "English",
+        },
+        {
+          value: "option5",
+          label: "Chemistry",
+        },
+        {
+          value: "option6",
+          label: "Physics",
+        },
+        {
+          value: "option7",
+          label: "Biology",
+        },
+      ],
+      options2: [
+        {
+          value: "option1",
+          label: "202102",
+        },
+        {
+          value: "option2",
+          label: "202101",
+        },
+        {
+          value: "option3",
+          label: "202002",
+        },
+        {
+          value: "option4",
+          label: "202001",
+        },
+      ],
+      options3: [
+        {
+          value: "option1",
+          label: "Monthly exam1",
+        },
+        {
+          value: "option2",
+          label: "Midterm exam",
+        },
+        {
+          value: "option3",
+          label: "Monthly exam2",
+        },
+        {
+          value: "option4",
+          label: "Final exam",
+        },
+      ],
+      options4: [
+        {
+          value: "option1",
+          label: "Class11",
+        },
+        {
+          value: "option2",
+          label: "Class12",
+        },
+      ],
+      value1: "",
+      value2: "",
+      value3: "",
+      value4: "",
       //表格数据
       tableData: [
         {
@@ -267,15 +330,18 @@ export default {
 .home-container {
   height: 100%;
 }
-.right{
+
+.right {
   width: 1303.2px;
   float: left;
- }
-.main{
+}
+
+.main {
   width: 100%;
   //display: flex;
   height: 700px;
 }
+
 .avater_box {
   height: 80px;
   width: 80px;
@@ -296,22 +362,19 @@ export default {
 
 .block-col-4 {
   width: 100%;
-  height: 50px;
+  height: 53px;
 }
-
 .choose {
-  background-color: #e5e3e1;
-  //   width: 246;
-  //   height: 53;
-  border: 1px solid #c2bfbc;
-  color: #656361;
+  width: 246px;
+  height: 53px;
+  margin: 30px 20px 30px 50px;
 }
+//.chosen {
+//  background-color: #eee;
+//  border: 1px solid #c2bfbc;
+//  color: #656361;
+//}
 
-.chosen {
-  background-color: #eee;
-  border: 1px solid #c2bfbc;
-  color: #656361;
-}
 
 #pieChart {
   width: 600px;
@@ -321,25 +384,30 @@ export default {
   float: left;
   //display: flex;
 }
-#scoreTable{
+
+#scoreTable {
   margin: 5px 20px;
 }
-.score{
+
+.score {
   display: inline-block;
   float: left;
   margin-left: 100px;
 }
-.term{
+
+.term {
   display: inline-block;
   float: left;
   margin-left: 100px;
 }
-.test{
+
+.test {
   display: inline-block;
   float: left;
   margin-left: 100px;
 }
-.classes{
+
+.classes {
   display: inline-block;
   float: left;
   margin-left: 100px;
