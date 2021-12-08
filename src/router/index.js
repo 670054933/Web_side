@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import login from '@/views/login.vue'
+import Login from '@/views/login.vue'
 import Home from '@/views/Home.vue'
 import ScoreReport from '@/views/ScoreReport.vue'
 import HomePage from '@/views/HomePage'
@@ -22,8 +22,13 @@ export default new Router({
     {
       //登入
       path: '/',
+      redirect:'/Login',
+
+    },
+    {
+      path: '/Login',
+      component: Login,
       name: 'login',
-      component: require('@/views/login').default
     },
     {
       //注册
