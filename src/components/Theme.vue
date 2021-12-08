@@ -22,10 +22,10 @@
             <span>Score Report</span>
           </template>
         </el-menu-item>
-        <el-menu-item index="/SchoolAssignment">
-          <i class="el-icon-reading"></i>
-          <span>School Assignment</span>
-        </el-menu-item>
+<!--        <el-menu-item index="/SchoolAssignment">-->
+<!--          <i class="el-icon-reading"></i>-->
+<!--          <span>School Assignment</span>-->
+<!--        </el-menu-item>-->
         <el-menu-item index="/Communicate">
           <i class="el-icon-chat-line-round"></i>
           <span>Communicate</span>

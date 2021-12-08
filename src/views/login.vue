@@ -14,7 +14,7 @@
           active-text-color="#fda200"
         >
           <div class="tag1">
-            <el-menu-item @click="gotoHome">Home page</el-menu-item>
+            <el-menu-item>Home page</el-menu-item>
           </div>
           <div class="tag">
             <el-menu-item>About us</el-menu-item>
@@ -28,50 +28,15 @@
         </el-menu>
       </div>
       <div class="user">
-        <p>Teacher register</p>
-        <p>Email registration</p>
-        <input type="text" v-model="Email" />
-        <p>UserName</p>
-        <input type="text" v-model="userName" />
-        <br />
-        <div class="o">
-          <p>Grade</p>
-          <select name="Grade">
-            <option
-              selected="selected"
-              disabled="disabled"
-              style="display: none"
-              value=""
-            ></option>
-            <option value="Grade10">Grade10</option>
-            <option value="Grade11">Grade11</option>
-            <option value="Grade12">Grade12</option>
-          </select>
-          <p>Class</p>
-          <select name="Class">
-            <option
-              selected="selected"
-              disabled="disabled"
-              style="display: none"
-              value=""
-            ></option>
-            <option value="class1">class1</option>
-            <option value="class2">class2</option>
-            <option value="class3">class3</option>
-          </select>
-          <br /><br /><br />
-        </div>
-        <p>Set password</p>
-        <input type="text" v-model="Email" />
-        <p>Confirm password</p>
-        <input type="text" v-model="userName" />
+        <p>Teacher Login</p>
+        <p>Account number</p>
+        <input type="text" v-model="userName" @click="login" />
+        <p>Password</p>
+        <input type="text" v-model="password" @click="login" />
         <br />
         <div class="b">
-          <input
-            type="button"
-            value="Complete Registration"
-            @click="gotoHome"
-          />
+          <input type="button" value="Login" />
+          <input type="button" value="Register" @click="gotoRegister" />
         </div>
       </div>
     </div>
@@ -81,7 +46,7 @@
 
 <script>
 export default {
-  name: "register",
+  name: "login",
   data() {
     return {
       background: {
@@ -102,11 +67,11 @@ export default {
       head: {
         activeIndex: "1",
         activeIndex2: "1",
-        // },
-        // methods: {
-        //   handleSelect(key, keyPath) {
-        //     console.log(key, keyPath);
-        //   },
+      },
+      methods: {
+        handleSelect(key, keyPath) {
+          console.log(key, keyPath);
+        },
       },
     };
   },
@@ -126,13 +91,23 @@ export default {
     },
   },
   methods: {
-    gotoHome() {
-      this.$router.push({ path: "/Home" });
+    login() {
+      if (!this.userName) {
+        this.$message.error("Please input your user name");
+        return;
+      }
+      if (!this.password) {
+        this.$message.error("Please input your password");
+        return;
+      }
+    },
+    gotoRegister() {
+      this.$router.push({ path: "/register" });
     },
   },
 };
 </script>
-<style lang="less" scoped>
+<style>
 .bgBackground {
   background-size: 100% 100%;
   height: 100%;
@@ -147,25 +122,25 @@ export default {
   background-color: rgba(67, 66, 66, 0.72);
 }
 .user {
-  height: 600px;
-  width: 400px;
+  height: 330px;
+  width: 330px;
   padding-left: 20px;
-  margin: 50px 600px;
+  margin: 150px 600px;
   color: #fcfafa;
   background-color: rgba(67, 66, 66, 0.76);
   font-size: 20px;
 }
 .user input {
   height: 30px;
-  width: 350px;
+  width: 300px;
 }
 .b input {
   height: 40px;
-  width: 250px;
-  margin: 20px 65px;
+  width: 100px;
+  margin: 40px 30px;
   background-color: rgba(67, 66, 66, 0.8);
   font-size: 20px;
-  color: hsl(35, 98%, 56%);
+  color: #fda220;
 }
 .tag1 {
   float: left;
@@ -173,15 +148,5 @@ export default {
 }
 .tag {
   float: left;
-}
-.o p {
-  float: left;
-  margin: 30px 10px;
-}
-.o select {
-  float: left;
-  height: 35px;
-  width: 90px;
-  margin: 30px 10px;
 }
 </style>
