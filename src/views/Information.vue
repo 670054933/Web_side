@@ -3,7 +3,7 @@
     <!--侧边栏-->
     <el-aside width="200px">
       <div class="avater_box">
-        <img src="../image/头像.png" alt="" />
+        <img src="@/image/头像.png" alt="" />
       </div>
       <!--侧边栏菜单区-->
       <el-menu
@@ -68,6 +68,8 @@
 </template>
 
 <script>
+import {gradeQuery} from "@/api/api";
+
 export default {
   name:'Information',
   setup() {},
@@ -75,6 +77,16 @@ export default {
     gotoScoreStatistics() {
       this.$router.push({ path: "/ScoreStatistics" });
     },
+    queryGrade(p){
+      p = {
+        subject:'Chinese',
+      }
+      gradeQuery(p).then(res =>{
+          console.log(res)
+      })
+
+
+    }
   },
 };
 </script>

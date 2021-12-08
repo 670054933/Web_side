@@ -3,7 +3,7 @@
     <!--侧边栏-->
     <el-aside width="200px">
       <div class="avater_box">
-        <img src="../assets/avatar.png" alt="" />
+<!--        <img src="../assets/avatar.png" alt="" />-->
       </div>
       <!--侧边栏菜单区-->
       <el-menu
@@ -90,7 +90,7 @@
 
 <script>
 export default {
-  name: "eCharts",
+  name: "Personal",
   data() {
     return {
       // msg: "Welcome to Your Vue.js App",
@@ -135,7 +135,7 @@ export default {
   methods: {
     drawLine() {
       // 基于准备好的dom，初始化echarts实例
-      var lineChart = this.$echarts.init(document.getElementById("lineChart"));
+      const lineChart = this.$echarts.init(document.getElementById("lineChart"));
       // 绘制图表
       lineChart.setOption({
         xAxis: {

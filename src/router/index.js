@@ -8,6 +8,7 @@ import SchoolAssignment from "@/views/SchoolAssignment";
 import Communicate from '@/views/Communicate'
 import Information from '@/views/Information'
 import register from '@/views/2.vue'
+import Personal from "@/views/Personal";
 
 
 Vue.use(Router)
@@ -47,6 +48,12 @@ export default new Router({
       path:'/ScoreReport',
       component: ScoreReport,
       name:'ScoreReport',
+    },
+    {
+      //个人成绩
+      path:'/Personal',
+      component:Personal,
+      name:'Personal'
     },
     {
       path:'/SchoolAssignment',
