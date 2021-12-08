@@ -6,7 +6,7 @@
       <div class="main">
         <!--选择栏-->
         <div class="block-col-4">
-          <el-select v-model="value1" filterable placeholder="Score" class="choose">
+          <el-select v-model="value1" filterable placeholder="Subject" class="choose">
             <el-option
                 v-for="item in options1"
                 :key="item.value"
@@ -56,6 +56,7 @@
               :data="tableData"
               border
               stripe
+              @row-click="aa"
               :row-style="tableRowStyle"
               :header-cell-style="tableHeaderColor"
               style="width: 100%"
@@ -78,7 +79,7 @@
         </div>
 
         <!--弹窗-->
-        <Analysis></Analysis>
+        <Analysis :grade="grade" ref="analysis"></Analysis>
       </div>
     </div>
   </div>
@@ -94,6 +95,7 @@ export default {
   components: {Header, Theme, Analysis},
   data() {
     return {
+      grade:{},
       // msg: "Welcome to Your Vue.js App",
       //选择栏选项数据
       options1: [
@@ -311,6 +313,12 @@ export default {
       })
 
     },
+    aa(row){
+      console.log(row);
+      this.grade = row;
+      this.$refs.analysis.open();
+    },
+
     //设置表头行的样式
     tableHeaderColor({row, column, rowIndex, columnIndex}) {
       return "background-color:#e5e3e1;color:#3f3e3d;font-wight:500;font-size:30;text-align:center";
@@ -389,7 +397,7 @@ export default {
   margin: 5px 20px;
 }
 
-.score {
+.subject {
   display: inline-block;
   float: left;
   margin-left: 100px;

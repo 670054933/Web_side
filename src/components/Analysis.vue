@@ -1,12 +1,12 @@
 <template>
-  <!-- 弹跳框 -->
-  <!--  placement指弹跳框出现的位置-->
-  <el-popover placement="right" :width="700" trigger="click">
-    <template #reference>
-      <el-button>Personal Analysis</el-button>
-    </template>
+<!--  <el-button type="text" @click="dialogFormVisible = true">-->
+<!--    Personal Analysis-->
+<!--  </el-button>-->
+
+  <!--  弹窗-->
+  <el-dialog :visible.sync="show" v-model="dialogFormVisible" title="Personal Analysis">
     <div class="name">
-      <p>Feliciano</p>
+      <p>{{ name }}</p>
     </div>
     <!--选择栏-->
     <el-select v-model="value1" placeholder="Score">
@@ -28,6 +28,7 @@
       >
       </el-option>
     </el-select>
+
     <!--折线图-->
     <div id="lineChart" :style="{ width: '600px', height: '360px' }"></div>
     <!--名次显示框-->
@@ -39,14 +40,29 @@
       Class Rank:
       <input class='showRank' type="text" name="classRank" readonly="readonly" value="NO.1">
     </div>
-  </el-popover>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">Cancel</el-button>
+        <el-button type="primary" @click="dialogFormVisible = false"
+        >Confirm</el-button
+        >
+      </span>
+    </template>
+  </el-dialog>
+
 </template>
 
 <script>
 export default {
   name: "Analysis",
+  props: {
+    grade:{
+      type:Array,
+    }
+  },
   data() {
     return {
+      show:false,
       // msg: "Welcome to Your Vue.js App",
       //选择栏选项数据
       options: [
@@ -81,10 +97,13 @@ export default {
       ],
       value1: "",
       value2: "",
+      name: "Feliciano",
+
     };
   },
   mounted() {
     this.drawLine();
+
   },
   methods: {
     drawLine() {
@@ -120,6 +139,12 @@ export default {
         ],
       });
     },
+    open(){
+      this.show = true
+    },
+    close(){
+      this.show=false;
+    },
     //设置表头行的样式
     tableHeaderColor({row, column, rowIndex, columnIndex}) {
       return "background-color:#e5e3e1;color:#3f3e3d;font-wight:500;font-size:30;text-align:center";
@@ -151,9 +176,11 @@ export default {
 .lineChart {
   color: #6f747a;
 }
-.rank{
+
+.rank {
   float: right;
 }
+
 .showRank {
   height: 25px;
   width: 40px;
