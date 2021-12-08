@@ -346,7 +346,7 @@ export default {
 
 .main {
   width: 100%;
-  //display: flex;
+  overflow-y:auto;
   height: 700px;
 }
 
