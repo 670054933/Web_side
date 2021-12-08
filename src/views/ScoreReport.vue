@@ -95,7 +95,7 @@ export default {
   components: {Header, Theme, Analysis},
   data() {
     return {
-      grade:[],
+      grade:{},
       // msg: "Welcome to Your Vue.js App",
       //选择栏选项数据
       options1: [
@@ -314,7 +314,6 @@ export default {
 
     },
     aa(row){
-      console.log(row);
       this.grade = row;
       console.log(this.grade)
       this.$refs.analysis.open();

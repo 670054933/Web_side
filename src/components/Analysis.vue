@@ -4,7 +4,10 @@
 <!--  </el-button>-->
 
   <!--  弹窗-->
-  <el-dialog :visible.sync="show"  title="Personal Analysis">
+  <el-dialog
+      :visible.sync="show"
+      title="Personal Analysis"
+      @opened="opened">
     <div class="name">
       <p>{{ name }}</p>
     </div>
@@ -19,35 +22,35 @@
       </el-option>
     </el-select>
 
-    <el-select v-model="value2" placeholder="Rank">
-      <el-option
-          v-for="item in options"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-      >
-      </el-option>
-    </el-select>
+<!--    <el-select v-model="value2" placeholder="Rank">-->
+<!--      <el-option-->
+<!--          v-for="item in options"-->
+<!--          :key="item.value"-->
+<!--          :label="item.label"-->
+<!--          :value="item.value"-->
+<!--      >-->
+<!--      </el-option>-->
+<!--    </el-select>-->
 
     <!--折线图-->
-    <div id="lineChart" :style="{ width: '600px', height: '360px' }"></div>
+    <div id="lineChart" ref="chart" :style="{ width: '600px', height: '360px' }"></div>
     <!--名次显示框-->
-    <div class="rank">
-      Grade Rank:
-      <input class='showRank' type="text" name="gradeRank" readonly="readonly" value="NO.1">
-    </div>
-    <div class="rank">
-      Class Rank:
-      <input class='showRank' type="text" name="classRank" readonly="readonly" value="NO.1">
-    </div>
-    <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="dialogFormVisible = false"
-        >Confirm</el-button
-        >
-      </span>
-    </template>
+<!--    <div class="rank">-->
+<!--      Grade Rank:-->
+<!--      <input class='showRank' type="text" name="gradeRank" readonly="readonly" value="NO.1">-->
+<!--    </div>-->
+<!--    <div class="rank">-->
+<!--      Class Rank:-->
+<!--      <input class='showRank' type="text" name="classRank" readonly="readonly" value="NO.1">-->
+<!--    </div>-->
+<!--    <template #footer>-->
+<!--      <span class="dialog-footer">-->
+<!--        <el-button @click="dialogFormVisible = false">Cancel</el-button>-->
+<!--        <el-button type="primary" @click="dialogFormVisible = false"-->
+<!--        >Confirm</el-button-->
+<!--        >-->
+<!--      </span>-->
+<!--    </template>-->
   </el-dialog>
 
 </template>
@@ -102,13 +105,20 @@ export default {
     };
   },
   mounted() {
-    this.drawLine();
+    // this.drawLine();
 
   },
+
   methods: {
+    opened(){
+      this.$nextTick(() => {
+        this.drawLine()
+      })
+    },
     drawLine() {
       // 基于准备好的dom，初始化echarts实例
-      var lineChart = this.$echarts.init(document.getElementById("lineChart"));
+      // const line_dv = this.$refs.chart;
+      let lineChart = this.$echarts.init(this.$refs.chart);
       // 绘制图表
       lineChart.setOption({
         xAxis: {
@@ -143,7 +153,7 @@ export default {
       this.show = true
     },
     close(){
-      this.show=false;
+      this.show = false
     },
     //设置表头行的样式
     tableHeaderColor({row, column, rowIndex, columnIndex}) {
