@@ -7,7 +7,8 @@
   <el-dialog
       :visible.sync="show"
       title="Personal Analysis"
-      @opened="opened">
+      @opened="opened"
+      width="650px">
     <div class="name">
       <p>{{ name }}</p>
     </div>
@@ -155,14 +156,6 @@ export default {
     close(){
       this.show = false
     },
-    //设置表头行的样式
-    tableHeaderColor({row, column, rowIndex, columnIndex}) {
-      return "background-color:#e5e3e1;color:#3f3e3d;font-wight:500;font-size:30;text-align:center";
-    },
-    //设置表格行的样式
-    tableRowStyle({row, rowIndex}) {
-      return "background-color:pink;font-size:15px;text-align:center";
-    },
   },
 }
 </script>
@@ -177,26 +170,5 @@ export default {
   margin-left: 32px;
   padding: 5px 5px;
   color: #3f3e3d;
-}
-
-.el-select {
-  margin: 20px 5px;
-}
-
-.lineChart {
-  color: #6f747a;
-}
-
-.rank {
-  float: right;
-}
-
-.showRank {
-  height: 25px;
-  width: 40px;
-  border: 1px solid #c2bfbc; /*加边框 */
-  border-radius: 3px;
-  background-color: #fbf9f8;
-  margin: 5px;
 }
 </style>
