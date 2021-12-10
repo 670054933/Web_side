@@ -12,29 +12,32 @@
         </div>
         <!--  表单  -->
         <el-form ref="form" :model="form">
-          <el-row>
-            <el-col :span="11">
-              <el-form-item label="Phone number:" label-width="180px">
-                <el-input v-model="form.phoneNO"></el-input>
-              </el-form-item>
-            </el-col>
-            <el-col :span="11">
-              <el-form-item label="E-mail:" label-width="180px">
-                <el-input v-model="form.email"></el-input>
-              </el-form-item>
-            </el-col>
-          </el-row>
-
-          <el-form-item label="Subjects taught:" label-width="180px">
-            <el-input v-model="form.subject"></el-input>
-          </el-form-item>
-          <el-form-item label="Professional ranks:" label-width="180px">
-            <el-input v-model="form.profession"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button @click="onModify">Modify</el-button>
-            <el-button @click="onConfirm">Confirm</el-button>
-          </el-form-item>
+          <div class="input">
+            <el-row>
+              <el-col :span="11">
+                <el-form-item label="Phone number:" label-width="40%">
+                  <el-input v-model="form.phoneNO"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="11">
+                <el-form-item label="E-mail:" label-width="40%">
+                  <el-input v-model="form.email"></el-input>
+                </el-form-item>
+              </el-col>
+            </el-row>
+            <el-form-item label="Subjects taught:" label-width="18%">
+              <el-input v-model="form.subject"></el-input>
+            </el-form-item>
+            <el-form-item label="Professional ranks:" label-width="18%">
+              <el-input v-model="form.profession"></el-input>
+            </el-form-item>
+          </div>
+          <div class="button">
+            <el-form-item>
+              <el-button @click="onModify">Modify</el-button>
+              <el-button @click="onConfirm">Confirm</el-button>
+            </el-form-item>
+          </div>
         </el-form>
       </div>
     </div>
@@ -136,28 +139,37 @@ export default {
   margin: 20px 100px 20px 100px;
   background-color: #fbfafa;
 }
+
+.input{
+  width: 100%;
+  height: 66%;
+}
 .el-row{
-  margin-top: 30px;
-  height: 60px;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  height: 20%;
 }
 .el-form-item {
-  margin-left: 20px;
-  padding-bottom: 20px;
+  margin-left: 1%;
+  padding-bottom: 3%;
 }
 .el-input {
   width: 350px;
-  height: 50px;
   background-color: #fbfafa;
 }
 
+.button{
+  width: 100%;
+  height: 33%;
+}
 .el-button {
-  height: 57px;
-  width: 159px;
+  height: 8%;
+  width: 15%;
   background-color: #fbfafa;
 
   border: 2px solid #98abc7;
   border-radius: 3%;
-  margin: 30px 240px;
+  margin: 0% 23%;
   //字的大小及颜色
   font-size: 20px;
   color: #51504e;
