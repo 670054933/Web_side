@@ -11,15 +11,15 @@
           <p class="char">Class taught: {{ classtaught }}</p>
         </div>
         <!--  表单  -->
-        <el-form ref="form" :model="form" label-width="120px">
+        <el-form ref="form" :model="form">
           <el-row>
             <el-col :span="11">
-              <el-form-item label="Phone number:"  label-width="180px">
+              <el-form-item label="Phone number:" label-width="180px">
                 <el-input v-model="form.phoneNO"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="11">
-              <el-form-item label="E-mail:"  label-width="180px">
+              <el-form-item label="E-mail:" label-width="180px">
                 <el-input v-model="form.email"></el-input>
               </el-form-item>
             </el-col>
@@ -32,8 +32,8 @@
             <el-input v-model="form.profession"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button>Modify</el-button>
-            <el-button @click="onSubmit">Confirm</el-button>
+            <el-button @click="onModify">Modify</el-button>
+            <el-button @click="onConfirm">Confirm</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -53,6 +53,12 @@ export default {
   },
   data() {
     return {
+      //title数据
+      name: "Ann",
+      post: "Head teacher",
+      classtaught: "Class 11, Class 12",
+
+      //表单数据
       form: {
         phoneNO: '',
         email: '',
@@ -60,9 +66,6 @@ export default {
         profession: '',
         desc: '',
       },
-      name: "Ann",
-      post: "Head teacher",
-      classtaught: "Class 11, Class 12",
     }
   },
   methods: {
@@ -77,10 +80,12 @@ export default {
         console.log(res)
       })
     },
-    onSubmit() {
+    onModify() {
+      console.log('modify!')
+    },
+    onConfirm() {
       console.log('submit!')
-    }
-    ,
+    },
   },
 }
 ;
@@ -102,9 +107,10 @@ export default {
   height: 700px;
 }
 
-.title{
+.title {
   width: 100%;
   height: 120px;
+
   img {
     width: 80px;
     height: 80px;
@@ -113,6 +119,7 @@ export default {
     padding: 20px 35px;
     float: left;
   }
+
   .char {
     font-size: 20px;
     margin: 40px 30px;
@@ -127,21 +134,32 @@ export default {
   border: 3px solid #98abc7;
   border-radius: 1%;
   margin: 20px 100px 20px 100px;
+  background-color: #fbfafa;
 }
-
+.el-row{
+  margin-top: 30px;
+  height: 60px;
+}
 .el-form-item {
   margin-left: 20px;
-  margin-top: 20px;
+  padding-bottom: 20px;
 }
-
 .el-input {
   width: 350px;
   height: 50px;
+  background-color: #fbfafa;
 }
 
 .el-button {
+  height: 57px;
+  width: 159px;
+  background-color: #fbfafa;
+
   border: 2px solid #98abc7;
-  border-radius: 2%;
-  margin: 20px 30px;
+  border-radius: 3%;
+  margin: 30px 240px;
+  //字的大小及颜色
+  font-size: 20px;
+  color: #51504e;
 }
 </style>
