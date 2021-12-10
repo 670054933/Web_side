@@ -6,9 +6,9 @@
       <div class="main">
         <!--选择栏-->
         <div class="block-col-4">
-          <el-select v-model="value1" filterable placeholder="Subject" class="choose">
+          <el-select v-model="form.subject" filterable placeholder="Subject" class="choose">
             <el-option
-                v-for="item in options1"
+                v-for="item in Subjects"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value"
@@ -16,9 +16,9 @@
             </el-option>
           </el-select>
 
-          <el-select v-model="value2" filterable placeholder="Term" class="choose">
+          <el-select v-model="form.semNo" filterable placeholder="Term" class="choose">
             <el-option
-                v-for="item in options2"
+                v-for="item in Terms"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value"
@@ -26,9 +26,9 @@
             </el-option>
           </el-select>
 
-          <el-select v-model="value3" filterable placeholder="Test" class="choose">
+          <el-select v-model="form.examNo" filterable placeholder="Test" class="choose">
             <el-option
-                v-for="item in options3"
+                v-for="item in Exams"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value"
@@ -36,9 +36,9 @@
             </el-option>
           </el-select>
 
-          <el-select v-model="value4" filterable placeholder="Class" class="choose">
+          <el-select v-model="form.classNo" filterable placeholder="Class" class="choose">
             <el-option
-                v-for="item in options4"
+                v-for="item in Classes"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value"
@@ -56,7 +56,7 @@
               :data="tableData"
               border
               stripe
-              @row-click="aa"
+              @row-click="rowClick"
               :row-style="tableRowStyle"
               :header-cell-style="tableHeaderColor"
               style="width: 100%"
@@ -89,95 +89,99 @@
 import Theme from "@/components/Theme";
 import Header from "@/components/Headers";
 import Analysis from "@/components/Analysis";
+import {queryStudent} from "@/api/api";
 
 export default {
   name: "ScoreReport",
   components: {Header, Theme, Analysis},
   data() {
     return {
+      form:{
+        subject: "",
+        semNo: "",
+        examNo: "",
+        classNo: "",
+      },
       grade:{},
       // msg: "Welcome to Your Vue.js App",
       //选择栏选项数据
-      options1: [
+      Subjects: [
         {
-          value: "option1",
+          value: "total",
           label: "Total",
         },
         {
-          value: "option2",
+          value: "chinese",
           label: "Chinese",
         },
         {
-          value: "option3",
+          value: "maths",
           label: "Maths",
         },
         {
-          value: "option4",
+          value: "english",
           label: "English",
         },
         {
-          value: "option5",
+          value: "chemistry",
           label: "Chemistry",
         },
         {
-          value: "option6",
+          value: "physics",
           label: "Physics",
         },
         {
-          value: "option7",
+          value: "biology",
           label: "Biology",
         },
       ],
-      options2: [
+      Terms: [
         {
-          value: "option1",
+          value: "212",
           label: "202102",
         },
         {
-          value: "option2",
+          value: "211",
           label: "202101",
         },
         {
-          value: "option3",
+          value: "202",
           label: "202002",
         },
         {
-          value: "option4",
+          value: "201",
           label: "202001",
         },
       ],
-      options3: [
+      Exams: [
         {
-          value: "option1",
+          value: "1",
           label: "Monthly exam1",
         },
         {
-          value: "option2",
+          value: "2",
           label: "Midterm exam",
         },
         {
-          value: "option3",
+          value: "3",
           label: "Monthly exam2",
         },
         {
-          value: "option4",
+          value: "4",
           label: "Final exam",
         },
       ],
-      options4: [
+      Classes: [
         {
-          value: "option1",
+          value: "1",
           label: "Class11",
         },
         {
-          value: "option2",
+          value: "2",
           label: "Class12",
         },
       ],
-      value1: "",
-      value2: "",
-      value3: "",
-      value4: "",
+
       //表格数据
       tableData: [
         {
@@ -313,10 +317,19 @@ export default {
       })
 
     },
-    aa(row){
+    rowClick(row){
       this.grade = row;
       console.log(this.grade)
       this.$refs.analysis.open();
+    },
+
+    queryStudents(param){
+      param = {
+        ...this.form
+      }
+      queryStudent(param).then(res =>{
+        console.log(res)
+      })
     },
 
     //设置表头行的样式
@@ -330,8 +343,9 @@ export default {
   },
   mounted() {
     this.drawLine();
+    this.queryStudents();
   },
-};
+}
 </script>
 
 <style lang="less" scoped>

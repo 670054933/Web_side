@@ -1,3 +1,13 @@
-import {post} from "@/utils/request";
+import service from "@/utils/request";
 
-export const gradeQuery = p => post('',p);
+const api ={
+    queryStudent:'/queryAllStudent'
+}
+
+export function queryStudent(param){
+    return service({
+        url:api.queryStudent,
+        method:'post',
+        data:param
+    })
+}

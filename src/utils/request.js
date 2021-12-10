@@ -5,14 +5,14 @@ import { Message } from 'element-ui';
 
 
 const service = axios.create({
-    baseURL: process.env.NODE_ENV === 'http://45k1b40509.zicp.vip/',
+    baseURL:'http://45k1b40509.zicp.vip',
     headers:{
         post:{
-            'Content-Type': 'application/json;charset=utf-8'
+            'Content-Type': 'application/x-www-form-urlencoded'
         }
     },
     withCredentials: true,
-    timeout: 30000,
+    timeout: 100000,
     validateStatus: function () {
         // 使用async-await，处理reject情况较为繁琐，所以全部返回resolve，在业务代码中处理异常
         return true
@@ -103,14 +103,4 @@ service.interceptors.response.use((response) => {
     return Promise.resolve(error)
 })
 
-export function post(url, params) {
-    return new Promise((resolve, reject) => {
-        axios.post(url, QS.stringify(params))
-            .then(res => {
-                resolve(res.data);
-            })
-            .catch(err =>{
-                reject(err.data)
-            })
-    });
-}
+export default service
