@@ -15,21 +15,21 @@
           <el-row>
             <el-col :span="11">
               <el-form-item label="Phone number:" label-width="180px">
-                <el-input v-model="form.phoneNO" :disabled="isModified"></el-input>
+                <el-input v-model="form.phoneNO"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="11">
               <el-form-item label="E-mail:" label-width="180px">
-                <el-input v-model="form.email" :disabled="isModified"></el-input>
+                <el-input v-model="form.email"></el-input>
               </el-form-item>
             </el-col>
           </el-row>
 
           <el-form-item label="Subjects taught:" label-width="180px">
-            <el-input v-model="form.subject" :disabled="isModified"></el-input>
+            <el-input v-model="form.subject"></el-input>
           </el-form-item>
           <el-form-item label="Professional ranks:" label-width="180px">
-            <el-input v-model="form.profession" :disabled="isModified"></el-input>
+            <el-input v-model="form.profession"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button @click="onModify">Modify</el-button>
@@ -53,7 +53,6 @@ export default {
   },
   data() {
     return {
-      isModified:true,
       //title数据
       name: "Ann",
       post: "Head teacher",
@@ -70,6 +69,9 @@ export default {
     }
   },
   methods: {
+    gotoScoreStatistics() {
+      this.$router.push({path: "/ScoreStatistics"});
+    },
     queryGrade(p) {
       p = {
         subject: 'Chinese',
@@ -80,11 +82,9 @@ export default {
     },
     onModify() {
       console.log('modify!')
-      this.isModified = false;
     },
     onConfirm() {
       console.log('submit!')
-      this.isModified = true;
     },
   },
 }
