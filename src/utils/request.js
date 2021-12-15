@@ -5,7 +5,7 @@ import { Message } from 'element-ui';
 
 
 const service = axios.create({
-    baseURL:'http://45k1b40509.zicp.vip',
+    baseURL:'http://team19.vipgz4.91tunnel.com/',
     headers:{
         post:{
             'Content-Type': 'application/x-www-form-urlencoded'

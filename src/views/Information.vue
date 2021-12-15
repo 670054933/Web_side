@@ -178,4 +178,11 @@ export default {
   font-size: 20px;
   color: #51504e;
 }
+.main{
+  width: 100%;
+  overflow-y:auto;
+  height: 700px;
+  border-right:1px solid #b0b5cd;
+  border-bottom: 1px solid #b0b5cd;
+}
 </style>
