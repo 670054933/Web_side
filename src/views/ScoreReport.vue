@@ -56,6 +56,7 @@
               :data="tableData"
               border
               stripe
+              height="200px"
               @row-click="rowClick"
               :row-style="tableRowStyle"
               :header-cell-style="tableHeaderColor"
@@ -183,80 +184,7 @@ export default {
       ],
 
       //表格数据
-      tableData: [
-        {
-          name: "Feliciano",
-          studentID: "1101",
-          chinese: "90",
-          maths: "100",
-          english: "98",
-          chemistry: "98",
-          physics: "95",
-          biology: "99",
-          sum: "580",
-          classRanking: "1",
-        },
-        {
-          name: "Garen",
-          studentID: "1102",
-          chinese: "92",
-          maths: "90",
-          english: "100",
-          chemistry: "99",
-          physics: "90",
-          biology: "95",
-          sum: "572",
-          classRanking: "2",
-        },
-        {
-          name: "Garen",
-          studentID: "1102",
-          chinese: "92",
-          maths: "90",
-          english: "100",
-          chemistry: "99",
-          physics: "90",
-          biology: "95",
-          sum: "572",
-          classRanking: "2",
-        },
-        {
-          name: "Garen",
-          studentID: "1102",
-          chinese: "92",
-          maths: "90",
-          english: "100",
-          chemistry: "99",
-          physics: "90",
-          biology: "95",
-          sum: "572",
-          classRanking: "2",
-        },
-        {
-          name: "Garen",
-          studentID: "1102",
-          chinese: "92",
-          maths: "90",
-          english: "100",
-          chemistry: "99",
-          physics: "90",
-          biology: "95",
-          sum: "572",
-          classRanking: "2",
-        },
-        {
-          name: "Garen",
-          studentID: "1102",
-          chinese: "92",
-          maths: "90",
-          english: "100",
-          chemistry: "99",
-          physics: "90",
-          biology: "95",
-          sum: "572",
-          classRanking: "2",
-        },
-      ],
+      tableData: [],
     };
   },
 
@@ -327,6 +255,7 @@ export default {
       param = {
         ...this.form
       }
+
       queryStudent(param).then(res =>{
         console.log(res)
       })

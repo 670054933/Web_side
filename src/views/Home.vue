@@ -5,8 +5,8 @@
       <Headers></Headers>
       <div class="main">
         <div class="w">
-          <el-carousel height="700px">
-            <el-carousel-item v-for="(item, index) in list_img" :key="index">
+          <el-carousel type="card" height="600px">
+            <el-carousel-item  v-for="(item, index) in list_img" :key="index">
               <h3 class="small">
                 <img :src="item.url" alt />
               </h3>
@@ -51,6 +51,7 @@ export default {
 }
 .w {
   margin: 0 auto;
+  margin-top: 50px;
   width: 1303.2px;
 }
 
@@ -63,15 +64,16 @@ export default {
   text-align: center;
 }
 
-.el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
-}
-
-.el-carousel__item:nth-child(2n + 1) {
-  background-color: #d3dce6;
-}
+//.el-carousel__item:nth-child(2n) {
+//  background-color: #99a9bf;
+//}
+//
+//.el-carousel__item:nth-child(2n + 1) {
+//  background-color: #d3dce6;
+//}
 
 .small img {
+  margin-top: 50px;
   width: 100%;
   height: 100%;
 }

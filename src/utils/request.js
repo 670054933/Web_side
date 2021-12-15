@@ -8,7 +8,7 @@ const service = axios.create({
     baseURL:'http://team19.vipgz4.91tunnel.com/',
     headers:{
         post:{
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/json'
         }
     },
     withCredentials: true,
