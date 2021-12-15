@@ -97,10 +97,10 @@ export default {
   data() {
     return {
       form:{
-        subject: "",
-        semNo: "",
-        examNo: "",
-        classNo: "",
+        subject: "total",
+        semNo: "212",
+        examNo: "1",
+        classNo: "1",
       },
       grade:{},
       // msg: "Welcome to Your Vue.js App",
@@ -362,6 +362,8 @@ export default {
   width: 100%;
   overflow-y:auto;
   height: 700px;
+  border-right:1px solid #b0b5cd;
+  border-bottom: 1px solid #b0b5cd;
 }
 
 .avater_box {

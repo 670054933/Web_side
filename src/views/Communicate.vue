@@ -3,28 +3,9 @@
     <Theme></Theme>
     <div class="right">
       <Header></Header>
-      <div>
-        <p>You can send notifications to students or parents.</p>
-      </div>
-      <div>
-        <span>Student:</span>
-        <span>Parent:</span>
-      </div>
-      <div class="class11">
-
-        <div class="studentsCommunication">
-<!--          <img src="@/image/studentCommunication.png" alt="">-->
-        </div>
-        <div class="parentsCommunication">
-<!--          <img src="@/image/parentCommunication.png" alt="">-->
-        </div>
-      </div>
-      <div class="class12">
-        <div class="studentsCommunication">
-<!--          <img src="@/image/studentCommunication.png" alt="">-->
-        </div>
-        <div class="parentsCommunication">
-<!--          <img src="@/image/parentCommunication.png" alt="">-->
+      <div class="main">
+        <div class="S_List">
+            askdflkjaslkdfjl
         </div>
       </div>
     </div>
@@ -41,21 +22,19 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.class11{
-  width: 100%;
-  height: 200px;
+.right {
+  width: 1303.2px;
+  float: left;
 }
-.class12{
+
+.main {
   width: 100%;
-  height: 200px;
+  overflow-y:hidden;
+  height: 700px;
 }
-.studentsCommunication{
-  width: 200px;
-  height: 100px;
-  //background: rgba(0, 0, 0, 0)
-  //background-image: url("../image/studentCommunication.png") no-repeat scroll 100% 100%;
-  //background-image: url("../image/studentCommunication.png");
-  background-size: auto;
-  background-size: cover;
+
+.S_List{
+  width: 100px;
+  height: 100%;
 }
 </style>

@@ -3,19 +3,15 @@
     <Theme></Theme>
     <div class="right">
       <Headers></Headers>
-      <div>
-        <div id="app">
-          <div class="container">
-            <ul v-bind:style="{ marginLeft: mLeft + 'px' }">
-              <li v-for="img in imgs" :key="img.imgs">
-                <img v-bind:src="img.url" alt="" />
-              </li>
-            </ul>
-          </div>
-          <div class="btnControl">
-            <button @click="move(-1)">上一张</button>
-            <button @click="move(1)">下一张</button>
-          </div>
+      <div class="main">
+        <div class="w">
+          <el-carousel height="700px">
+            <el-carousel-item v-for="(item, index) in list_img" :key="index">
+              <h3 class="small">
+                <img :src="item.url" alt />
+              </h3>
+            </el-carousel-item>
+          </el-carousel>
         </div>
       </div>
     </div>
@@ -26,63 +22,62 @@
 import Theme from "@/components/Theme";
 import Headers from "@/components/Headers";
 export default {
-  name:'Home',
+  name: 'Home',
   components: {Headers, Theme},
-  data: {
-    imgs: [
-      {
-        id: 1,
-        url: "https://wx2.sinaimg.cn/mw690/56155fd3gy1gawavtsqc3j21xg1abb2b.jpg",
-      },
-      {
-        id: 2,
-        url: "https://wx3.sinaimg.cn/mw690/56155fd3gy1gawaw5ofhgj21xg1abx6q.jpg",
-      },
-      {
-        id: 3,
-        url: "https://wx4.sinaimg.cn/mw690/56155fd3gy1gawawg18zpj21xg1abkjm.jpg",
-      },
-      {
-        id: 4,
-        url: "https://wx2.sinaimg.cn/mw690/56155fd3gy1gawawp8hd4j21xg1abx6q.jpg",
-      },
-    ],
-    i: 0, // 现在正在显示第0张(默认值)
-    mLeft: 0, // 图片ul的默认左边距为0 显示第0张
-    timer: null, // timer设置为定时器
-  },
-  setup() {},
-  methods: {
-    gotoScoreStatistics() {
-      this.$router.push({ path: "/ScoreStatistics" });
-    },
-    move: function (to) {
-      if (to == undefined) {
-        // 如果不传入参数, 默认为移动到下一张
-        to = 1;
-      }
-      this.i = this.i + to; // 移动到下一张或者上一张
-      if (this.i > 3) {
-        // 正着走到最后一张时跳到第一张
-        this.i = 0;
-      }
-      if (this.i < 0) {
-        // 倒着走到第一张时跳到最后一张
-        this.i = 3;
-      }
-      this.mLeft = -400 * this.i; // 设置data里表示图片ul的左边距为-400 / -800 / -1200, 分别显示第二张, 第三张, 第四章
-      console.log(this.mLeft); // 获取到每调用一次move函数, mLeft的最终值(控制图片显示)
-    },
-    created: function () {
-      // 生命周期钩子函数, 实例被创建时设置一个定时器, 每隔3秒钟调用一次无参数的move()函数
-      this.timer = setInterval(() => {
-        this.move();
-      }, 3000);
-    },
-  },
-};
+  data(){
+    return{
+      list_img: [
+        { url: require('../image/1.png') },
+        { url: require('../image/2.png') },
+        { url: require('../image/3.png') },
+        { url: require('../image/4.png') },
+      ],
+    }
+  }
+}
 </script>
 
 <style lang="less" scoped>
+.right {
+  width: 1303.2px;
+  float: left;
+}
+.main {
+  width: 100%;
+  overflow-y:auto;
+  height: 700px;
+  border-right:1px solid #b0b5cd;
+  border-bottom: 1px solid #b0b5cd;
+}
+.w {
+  margin: 0 auto;
+  width: 1303.2px;
+}
 
+.el-carousel__item h3 {
+  color: #475669;
+  font-size: 14px;
+  opacity: 1;
+  line-height: 300px;
+  margin: 0;
+  text-align: center;
+}
+
+.el-carousel__item:nth-child(2n) {
+  background-color: #99a9bf;
+}
+
+.el-carousel__item:nth-child(2n + 1) {
+  background-color: #d3dce6;
+}
+
+.small img {
+  width: 100%;
+  height: 100%;
+}
+
+.el-carousel__container {
+  width: 1226px;
+  height: 460px;
+}
 </style>

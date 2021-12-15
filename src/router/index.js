@@ -8,6 +8,7 @@ import SchoolAssignment from "@/views/SchoolAssignment";
 import Communicate from '@/views/Communicate'
 import Information from '@/views/Information'
 import register from '@/views/register.vue'
+import CommunicateDetail from "@/components/CommunicateDetail";
 
 
 
@@ -65,6 +66,11 @@ export default new Router({
       path:'/Communicate',
       component:Communicate,
       name:'Communicate'
+    },
+    {
+      path:'/CommunicateDetail',
+      component:CommunicateDetail,
+      name:'CommunicateDetail'
     },
     {
       //信息
