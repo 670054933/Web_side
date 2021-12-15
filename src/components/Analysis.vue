@@ -23,35 +23,8 @@
       </el-option>
     </el-select>
 
-<!--    <el-select v-model="value2" placeholder="Rank">-->
-<!--      <el-option-->
-<!--          v-for="item in options"-->
-<!--          :key="item.value"-->
-<!--          :label="item.label"-->
-<!--          :value="item.value"-->
-<!--      >-->
-<!--      </el-option>-->
-<!--    </el-select>-->
-
     <!--折线图-->
     <div id="lineChart" ref="chart" :style="{ width: '600px', height: '360px' }"></div>
-    <!--名次显示框-->
-<!--    <div class="rank">-->
-<!--      Grade Rank:-->
-<!--      <input class='showRank' type="text" name="gradeRank" readonly="readonly" value="NO.1">-->
-<!--    </div>-->
-<!--    <div class="rank">-->
-<!--      Class Rank:-->
-<!--      <input class='showRank' type="text" name="classRank" readonly="readonly" value="NO.1">-->
-<!--    </div>-->
-<!--    <template #footer>-->
-<!--      <span class="dialog-footer">-->
-<!--        <el-button @click="dialogFormVisible = false">Cancel</el-button>-->
-<!--        <el-button type="primary" @click="dialogFormVisible = false"-->
-<!--        >Confirm</el-button-->
-<!--        >-->
-<!--      </span>-->
-<!--    </template>-->
   </el-dialog>
 
 </template>
@@ -71,11 +44,11 @@ export default {
       //选择栏选项数据
       options: [
         {
-          value: "option1",
+          value: [100,200,300,400],
           label: "Total",
         },
         {
-          value: "option2",
+          value: [400,300,200,100],
           label: "Chinese",
         },
         {
@@ -99,14 +72,12 @@ export default {
           label: "Biology",
         },
       ],
-      value1: "",
+      value1: [],
       value2: "",
-      name: "Feliciano",
-
+      name: this.grade.stuname,
     };
   },
   mounted() {
-    // this.drawLine();
 
   },
 
@@ -136,7 +107,7 @@ export default {
         },
         series: [
           {
-            data: [576, 569, 562, 580],
+            data: this.value1,
             type: "line",
             //在数据点处显示数值
             label: {

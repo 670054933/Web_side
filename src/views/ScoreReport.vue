@@ -2,7 +2,7 @@
   <div>
     <Theme></Theme>
     <div class="right">
-      <Header></Header>
+      <Headers :isShow="isShow"></Headers>
       <div class="main">
         <!--选择栏-->
         <div class="block-col-4">
@@ -56,25 +56,25 @@
               :data="tableData"
               border
               stripe
-              height="200px"
+              height="400px"
               @row-click="rowClick"
               :row-style="tableRowStyle"
               :header-cell-style="tableHeaderColor"
               style="width: 100%"
           ><!--stripe表示斑马纹;header-row-style表头行的 style 的回调方法;row-style 行的 style 的回调方法-->
-
-            <el-table-column prop="name" label="Name" width="120"/>
-            <el-table-column prop="studentID" label="StudentID" width="120"/>
+            <el-table-column prop="stuid" label="StudentID" width="120"/>
+            <el-table-column prop="stuname" label="Name" width="120"/>
             <el-table-column prop="chinese" label="Chinese" width="120"/>
-            <el-table-column prop="maths" label="Maths" width="120"/>
+            <el-table-column prop="math" label="Maths" width="120"/>
             <el-table-column prop="english" label="English" width="120"/>
             <el-table-column prop="chemistry" label="Chemistry" width="120"/>
             <el-table-column prop="physics" label="Physics" width="120"/>
             <el-table-column prop="biology" label="Biology" width="120"/>
-            <el-table-column prop="sum" label="Sum" width="120"/>
+            <el-table-column prop="total" label="Sum" width="120"/>
             <el-table-column
-                prop="classRanking"
+                prop="rank"
                 label="Class Ranking"
+                width="165px"
             />
           </el-table>
         </div>
@@ -88,22 +88,23 @@
 
 <script>
 import Theme from "@/components/Theme";
-import Header from "@/components/Headers";
+import Headers from "@/components/Headers";
 import Analysis from "@/components/Analysis";
 import {queryStudent} from "@/api/api";
 
 export default {
   name: "ScoreReport",
-  components: {Header, Theme, Analysis},
+  components: {Headers, Theme, Analysis},
   data() {
     return {
-      form:{
+      isShow: true,
+      form: {
         subject: "total",
         semNo: "212",
         examNo: "1",
         classNo: "1",
       },
-      grade:{},
+      grade: {},
       // msg: "Welcome to Your Vue.js App",
       //选择栏选项数据
       Subjects: [
@@ -245,19 +246,20 @@ export default {
       })
 
     },
-    rowClick(row){
+    rowClick(row) {
       this.grade = row;
       console.log(this.grade)
       this.$refs.analysis.open();
     },
 
-    queryStudents(param){
+    queryStudents(param) {
       param = {
         ...this.form
       }
 
-      queryStudent(param).then(res =>{
-        console.log(res)
+      queryStudent(param).then(res => {
+        this.tableData = res.data.data
+        console.log(this.tableData)
       })
     },
 
@@ -289,9 +291,9 @@ export default {
 
 .main {
   width: 100%;
-  overflow-y:auto;
+  overflow-y: auto;
   height: 700px;
-  border-right:1px solid #b0b5cd;
+  border-right: 1px solid #b0b5cd;
   border-bottom: 1px solid #b0b5cd;
 }
 
@@ -317,17 +319,22 @@ export default {
   width: 100%;
   height: 53px;
 }
+
 .choose {
   width: 246px;
   height: 53px;
   margin: 30px 20px 30px 50px;
 }
+
 //.chosen {
 //  background-color: #eee;
 //  border: 1px solid #c2bfbc;
 //  color: #656361;
 //}
 
+/deep/ .el-table--scrollable-y ::-webkit-scrollbar {
+  display: none;
+}
 
 #pieChart {
   width: 600px;

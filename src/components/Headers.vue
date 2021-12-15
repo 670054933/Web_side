@@ -1,9 +1,10 @@
 <template>
   <el-header>
     <el-button
-    icon="el-icon-arrow-left"
-    style="float: left;margin-top: 10px"
-    @click="back"
+        v-show="isShow"
+        icon="el-icon-arrow-left"
+        style="float: left;margin-top: 10px"
+        @click="back"
     ></el-button>
     <el-button
         icon="el-icon-switch-button"
@@ -16,10 +17,17 @@
 <script>
 export default {
   name: "Headers",
-  methods:{
-    back(){
-      console.log(111)
-      this.$router.go(-1)
+  props: {
+    isShow: {
+      type: Boolean
+    }
+  },
+  data() {
+    return {}
+  },
+  methods: {
+    back() {
+
     }
   }
 }

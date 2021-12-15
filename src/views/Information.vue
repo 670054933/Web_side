@@ -2,7 +2,7 @@
   <div>
     <Theme></Theme>
     <div class="right">
-      <Header></Header>
+      <Headers :is-show="isShow"></Headers>
       <div class="main">
         <div class="title">
           <img src="@/image/头像.png" alt=""/>
@@ -46,16 +46,17 @@
 
 <script>
 import Theme from "@/components/Theme";
-import Header from "@/components/Headers";
+import Headers from "@/components/Headers";
 import {gradeQuery} from "@/api/api";
 
 export default {
   name: 'Information',
-  components: {Theme, Header},
+  components: {Theme, Headers},
   setup() {
   },
   data() {
     return {
+      isShow:true,
       isModified:true,
       //title数据
       name: "Ann",

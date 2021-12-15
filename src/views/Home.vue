@@ -2,7 +2,7 @@
   <div>
     <Theme></Theme>
     <div class="right">
-      <Headers></Headers>
+      <Headers :is-show="isShow"></Headers>
       <div class="main">
         <div class="w">
           <el-carousel type="card" height="600px">
@@ -26,6 +26,7 @@ export default {
   components: {Headers, Theme},
   data(){
     return{
+      isShow:false,
       list_img: [
         { url: require('../image/1.png') },
         { url: require('../image/2.png') },
