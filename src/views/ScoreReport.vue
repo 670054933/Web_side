@@ -6,7 +6,7 @@
       <div class="main">
         <!--选择栏-->
         <div class="block-col-4">
-          <el-select v-model="form.subject" filterable placeholder="Subject" class="choose">
+          <el-select v-model="form.subject" filterable placeholder="Subject" class="choose" @change="change">
             <el-option
                 v-for="item in Subjects"
                 :key="item.value"
@@ -16,7 +16,7 @@
             </el-option>
           </el-select>
 
-          <el-select v-model="form.semNo" filterable placeholder="Term" class="choose">
+          <el-select v-model="form.semNo" filterable placeholder="Term" class="choose" @change="change">
             <el-option
                 v-for="item in Terms"
                 :key="item.value"
@@ -26,7 +26,7 @@
             </el-option>
           </el-select>
 
-          <el-select v-model="form.examNo" filterable placeholder="Test" class="choose">
+          <el-select v-model="form.examNo" filterable placeholder="Test" class="choose" @change="change">
             <el-option
                 v-for="item in Exams"
                 :key="item.value"
@@ -36,7 +36,7 @@
             </el-option>
           </el-select>
 
-          <el-select v-model="form.classNo" filterable placeholder="Class" class="choose">
+          <el-select v-model="form.classNo" filterable placeholder="Class" class="choose" @change="change">
             <el-option
                 v-for="item in Classes"
                 :key="item.value"
@@ -80,7 +80,7 @@
         </div>
 
         <!--弹窗-->
-        <Analysis :grade="grade" ref="analysis"></Analysis>
+        <Analysis :grade="grade" :term="this.form.semNo" ref="analysis"></Analysis>
       </div>
     </div>
   </div>
@@ -186,6 +186,15 @@ export default {
 
       //表格数据
       tableData: [],
+      pieData:[],
+      pieData1:[{value: 1048, name1: "A(85-100)"},
+        {value: 735, name: "B(70-84)"},
+        {value: 580, name: "C(60-69)"},
+        {value: 484, name: "D(0-59)"},],
+      pieData2:[{value: 234, name: "A(85-100)"},
+        {value: 235, name: "B(70-84)"},
+        {value: 520, name: "C(60-69)"},
+        {value: 354, name: "D(0-59)"},],
     };
   },
 
@@ -217,12 +226,7 @@ export default {
             radius: "40%", // 饼图的半径，外半径为可视区尺寸（容器高宽中较小一项）的 40% 长度。
 
             //数据
-            data: [
-              {value: 1048, name: "A(85-100)"},
-              {value: 735, name: "B(70-84)"},
-              {value: 580, name: "C(60-69)"},
-              {value: 484, name: "D(0-59)"},
-            ],
+            data: this.pieData,
             //高亮状态的扇区和标签样式。
             emphasis: {
               itemStyle: {
@@ -248,7 +252,6 @@ export default {
     },
     rowClick(row) {
       this.grade = row;
-      console.log(this.grade)
       this.$refs.analysis.open();
     },
 
@@ -263,6 +266,12 @@ export default {
       })
     },
 
+    change(){
+      this.queryStudents();
+      this.pieData = this.pieData2;
+      this.drawLine();
+    },
+
     //设置表头行的样式
     tableHeaderColor({row, column, rowIndex, columnIndex}) {
       return "background-color:#e5e3e1;color:#3f3e3d;font-wight:500;font-size:30;text-align:center";
@@ -273,8 +282,10 @@ export default {
     },
   },
   mounted() {
+    this.pieData = this.pieData1;
     this.drawLine();
     this.queryStudents();
+
   },
 }
 </script>

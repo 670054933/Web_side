@@ -1,7 +1,8 @@
 import service from "@/utils/request";
 
 const api ={
-    queryStudent:'/queryAllStudent'
+    queryStudent:'/queryAllStudent',
+    queryGrade:'/singleStudent',
 }
 
 export function queryStudent(param){
@@ -11,3 +12,12 @@ export function queryStudent(param){
         data:param
     })
 }
+
+export function queryGrade(param){
+    return service({
+        url:api.queryGrade,
+        method:'post',
+        data:param
+    })
+}
+

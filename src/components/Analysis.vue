@@ -8,12 +8,13 @@
       :visible.sync="show"
       title="Personal Analysis"
       @opened="opened"
+      @close="close"
       width="650px">
     <div class="name">
       <p>{{ name }}</p>
     </div>
     <!--选择栏-->
-    <el-select v-model="value1" placeholder="Score">
+    <el-select v-model="form.subject" placeholder="Score" @change="change">
       <el-option
           v-for="item in options"
           :key="item.value"
@@ -30,62 +31,84 @@
 </template>
 
 <script>
+import {queryGrade} from "@/api/api";
+
 export default {
   name: "Analysis",
   props: {
     grade:{
       type:Object,
+    },
+    term:{
+      type:String,
     }
   },
   data() {
     return {
       show:false,
+      form:{
+        semNo: "",
+        stuId: "",
+        subject:"total",
+      },
       // msg: "Welcome to Your Vue.js App",
       //选择栏选项数据
       options: [
         {
-          value: [100,200,300,400],
+          value: "total",
           label: "Total",
         },
         {
-          value: [400,300,200,100],
+          value: "chinese",
           label: "Chinese",
         },
         {
-          value: "option3",
+          value: "math",
           label: "Maths",
         },
         {
-          value: "option4",
+          value: "english",
           label: "English",
         },
         {
-          value: "option5",
+          value: "chemistry",
           label: "Chemistry",
         },
         {
-          value: "option6",
+          value: "physics",
           label: "Physics",
         },
         {
-          value: "option7",
+          value: "biology",
           label: "Biology",
         },
       ],
-      value1: [],
-      value2: "",
-      name: this.grade.stuname,
+      lineData: [],
+      name: "",
     };
   },
   mounted() {
-
   },
 
   methods: {
     opened(){
       this.$nextTick(() => {
-        this.drawLine()
+        this.form.semNo = this.term
+        this.name = this.grade.stuname
+        this.form.stuId = this.grade.stuid
+        this.queryGrades()
+        setTimeout(() =>{
+          this.drawLine()
+        },200)
+
       })
+    },
+    change(){
+      this.queryGrades()
+      setTimeout(() =>{
+        this.drawLine()
+      },300)
+      console.log(this.form)
     },
     drawLine() {
       // 基于准备好的dom，初始化echarts实例
@@ -107,7 +130,7 @@ export default {
         },
         series: [
           {
-            data: this.value1,
+            data: this.lineData,
             type: "line",
             //在数据点处显示数值
             label: {
@@ -126,6 +149,16 @@ export default {
     },
     close(){
       this.show = false
+      this.name = ""
+    },
+    queryGrades(param){
+      param={
+        ...this.form
+      }
+      queryGrade(param).then(res =>{
+        this.lineData = res.data.data;
+        console.log(this.lineData)
+      })
     },
   },
 }
