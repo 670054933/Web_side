@@ -9,18 +9,18 @@
         </div>
         <div class="choice">
           <div class="class_top">
-            <div class="class1">
+            <div class="class1" @click="class11_student">
               <p class="s">Students in Class 11</p>
             </div>
-            <div class="class2">
+            <div class="class2" @click="class11_parent">
               <p class="p">Parents in Class 11</p>
             </div>
           </div>
           <div class="class_bottom">
-            <div class="class1">
+            <div class="class1" @click="class12_student">
               <p class="s">Students in Class 12</p>
             </div>
-            <div class="class2">
+            <div class="class2" @click="class12_parent">
               <p class="p">Parents in Class 12</p>
             </div>
           </div>
@@ -40,7 +40,21 @@ export default {
     return{
       isShow:true
     }
-  }
+  },
+  methods: {
+    class11_student() {
+      console.log('class11 students chatting room')
+    },
+    class11_parent() {
+      console.log('class11 parents chatting room')
+    },
+    class12_student() {
+      console.log('class12 students chatting room')
+    },
+    class12_parent() {
+      console.log('class12 parents chatting room')
+    },
+  },
 }
 </script>
 
