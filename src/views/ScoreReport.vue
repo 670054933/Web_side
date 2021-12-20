@@ -2,11 +2,11 @@
   <div>
     <Theme></Theme>
     <div class="right">
-      <Header></Header>
+      <Headers :isShow="isShow"></Headers>
       <div class="main">
         <!--选择栏-->
         <div class="block-col-4">
-          <el-select v-model="form.subject" filterable placeholder="Subject" class="choose">
+          <el-select v-model="form.subject" filterable placeholder="Subject" class="choose" @change="change">
             <el-option
                 v-for="item in Subjects"
                 :key="item.value"
@@ -16,7 +16,7 @@
             </el-option>
           </el-select>
 
-          <el-select v-model="form.semNo" filterable placeholder="Term" class="choose">
+          <el-select v-model="form.semNo" filterable placeholder="Term" class="choose" @change="change">
             <el-option
                 v-for="item in Terms"
                 :key="item.value"
@@ -26,7 +26,7 @@
             </el-option>
           </el-select>
 
-          <el-select v-model="form.examNo" filterable placeholder="Test" class="choose">
+          <el-select v-model="form.examNo" filterable placeholder="Test" class="choose" @change="change">
             <el-option
                 v-for="item in Exams"
                 :key="item.value"
@@ -36,7 +36,7 @@
             </el-option>
           </el-select>
 
-          <el-select v-model="form.classNo" filterable placeholder="Class" class="choose">
+          <el-select v-model="form.classNo" filterable placeholder="Class" class="choose" @change="change">
             <el-option
                 v-for="item in Classes"
                 :key="item.value"
@@ -56,30 +56,31 @@
               :data="tableData"
               border
               stripe
+              height="400px"
               @row-click="rowClick"
               :row-style="tableRowStyle"
               :header-cell-style="tableHeaderColor"
               style="width: 100%"
           ><!--stripe表示斑马纹;header-row-style表头行的 style 的回调方法;row-style 行的 style 的回调方法-->
-
-            <el-table-column prop="name" label="Name" width="120"/>
-            <el-table-column prop="studentID" label="StudentID" width="120"/>
+            <el-table-column prop="stuid" label="StudentID" width="120"/>
+            <el-table-column prop="stuname" label="Name" width="120"/>
             <el-table-column prop="chinese" label="Chinese" width="120"/>
-            <el-table-column prop="maths" label="Maths" width="120"/>
+            <el-table-column prop="math" label="Maths" width="120"/>
             <el-table-column prop="english" label="English" width="120"/>
             <el-table-column prop="chemistry" label="Chemistry" width="120"/>
             <el-table-column prop="physics" label="Physics" width="120"/>
             <el-table-column prop="biology" label="Biology" width="120"/>
-            <el-table-column prop="sum" label="Sum" width="120"/>
+            <el-table-column prop="total" label="Sum" width="120"/>
             <el-table-column
-                prop="classRanking"
+                prop="rank"
                 label="Class Ranking"
+                width="165px"
             />
           </el-table>
         </div>
 
         <!--弹窗-->
-        <Analysis :grade="grade" ref="analysis"></Analysis>
+        <Analysis :grade="grade" :term="this.form.semNo" ref="analysis"></Analysis>
       </div>
     </div>
   </div>
@@ -87,22 +88,23 @@
 
 <script>
 import Theme from "@/components/Theme";
-import Header from "@/components/Headers";
+import Headers from "@/components/Headers";
 import Analysis from "@/components/Analysis";
-import {queryStudent} from "@/api/api";
+import {queryStudent,scoreLevel} from "@/api/api";
 
 export default {
   name: "ScoreReport",
-  components: {Header, Theme, Analysis},
+  components: {Headers, Theme, Analysis},
   data() {
     return {
-      form:{
+      isShow: true,
+      form: {
         subject: "total",
         semNo: "212",
         examNo: "1",
         classNo: "1",
       },
-      grade:{},
+      grade: {},
       // msg: "Welcome to Your Vue.js App",
       //选择栏选项数据
       Subjects: [
@@ -115,7 +117,7 @@ export default {
           label: "Chinese",
         },
         {
-          value: "maths",
+          value: "math",
           label: "Maths",
         },
         {
@@ -183,89 +185,20 @@ export default {
       ],
 
       //表格数据
-      tableData: [
-        {
-          name: "Feliciano",
-          studentID: "1101",
-          chinese: "90",
-          maths: "100",
-          english: "98",
-          chemistry: "98",
-          physics: "95",
-          biology: "99",
-          sum: "580",
-          classRanking: "1",
-        },
-        {
-          name: "Garen",
-          studentID: "1102",
-          chinese: "92",
-          maths: "90",
-          english: "100",
-          chemistry: "99",
-          physics: "90",
-          biology: "95",
-          sum: "572",
-          classRanking: "2",
-        },
-        {
-          name: "Garen",
-          studentID: "1102",
-          chinese: "92",
-          maths: "90",
-          english: "100",
-          chemistry: "99",
-          physics: "90",
-          biology: "95",
-          sum: "572",
-          classRanking: "2",
-        },
-        {
-          name: "Garen",
-          studentID: "1102",
-          chinese: "92",
-          maths: "90",
-          english: "100",
-          chemistry: "99",
-          physics: "90",
-          biology: "95",
-          sum: "572",
-          classRanking: "2",
-        },
-        {
-          name: "Garen",
-          studentID: "1102",
-          chinese: "92",
-          maths: "90",
-          english: "100",
-          chemistry: "99",
-          physics: "90",
-          biology: "95",
-          sum: "572",
-          classRanking: "2",
-        },
-        {
-          name: "Garen",
-          studentID: "1102",
-          chinese: "92",
-          maths: "90",
-          english: "100",
-          chemistry: "99",
-          physics: "90",
-          biology: "95",
-          sum: "572",
-          classRanking: "2",
-        },
-      ],
+      pieChart:'',
+      tableData: [],
+      typeName:[],
+      typeNum:[],
+
     };
   },
 
   methods: {
     drawLine() {
       // 基于准备好的dom，初始化echarts实例
-      let pieChart = this.$echarts.init(document.getElementById("pieChart"))
+      this.pieChart = this.$echarts.init(document.getElementById("pieChart"))
       // 绘制图表
-      pieChart.setOption({
+      this.pieChart.setOption({
         title: {
           text: "Score statistics", //标题名字
           // subtext: "Fake Data",
@@ -288,12 +221,7 @@ export default {
             radius: "40%", // 饼图的半径，外半径为可视区尺寸（容器高宽中较小一项）的 40% 长度。
 
             //数据
-            data: [
-              {value: 1048, name: "A(85-100)"},
-              {value: 735, name: "B(70-84)"},
-              {value: 580, name: "C(60-69)"},
-              {value: 484, name: "D(0-59)"},
-            ],
+            data: [],
             //高亮状态的扇区和标签样式。
             emphasis: {
               itemStyle: {
@@ -317,19 +245,46 @@ export default {
       })
 
     },
-    rowClick(row){
+    rowClick(row) {
       this.grade = row;
-      console.log(this.grade)
       this.$refs.analysis.open();
     },
 
-    queryStudents(param){
+    queryStudents(param) {
       param = {
         ...this.form
       }
-      queryStudent(param).then(res =>{
+
+      queryStudent(param).then(res => {
+        this.tableData = res.data.data
+        console.log(this.tableData)
+      })
+    },
+    queryScoreLevel(param){
+      param = {
+        ...this.form
+      }
+      scoreLevel(param).then(res =>{
+        const getData = []
+        for (let i = 0; i < res.data.data.length;i++){
+          const obj = new Object();
+          obj.name = res.data.data[i].name;
+          obj.value = res.data.data[i].value;
+          getData[i] = obj;
+        }
+        this.pieChart.setOption({
+          series:[{
+            data:getData,
+          }]
+        })
         console.log(res)
       })
+    },
+
+    change(){
+      this.queryStudents();
+      this.queryScoreLevel()
+      this.drawLine();
     },
 
     //设置表头行的样式
@@ -342,8 +297,9 @@ export default {
     },
   },
   mounted() {
-    this.drawLine();
     this.queryStudents();
+    this.queryScoreLevel()
+    this.drawLine();
   },
 }
 </script>
@@ -360,9 +316,9 @@ export default {
 
 .main {
   width: 100%;
-  overflow-y:auto;
+  overflow-y: auto;
   height: 700px;
-  border-right:1px solid #b0b5cd;
+  border-right: 1px solid #b0b5cd;
   border-bottom: 1px solid #b0b5cd;
 }
 
@@ -388,17 +344,22 @@ export default {
   width: 100%;
   height: 53px;
 }
+
 .choose {
   width: 246px;
   height: 53px;
   margin: 30px 20px 30px 50px;
 }
+
 //.chosen {
 //  background-color: #eee;
 //  border: 1px solid #c2bfbc;
 //  color: #656361;
 //}
 
+/deep/ .el-table--scrollable-y ::-webkit-scrollbar {
+  display: none;
+}
 
 #pieChart {
   width: 600px;

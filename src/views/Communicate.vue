@@ -2,7 +2,7 @@
   <div>
     <Theme></Theme>
     <div class="right">
-      <Header></Header>
+      <Headers :isShow="isShow"></Headers>
       <div class="main">
         <div class="S_List">
             askdflkjaslkdfjl
@@ -14,10 +14,15 @@
 
 <script>
 import Theme from "@/components/Theme";
-import Header from "@/components/Headers";
+import Headers from "@/components/Headers";
 export default {
   name: "Communicate",
-  components: {Theme,Header},
+  components: {Theme,Headers},
+  data(){
+    return{
+      isShow:true
+    }
+  }
 }
 </script>
 

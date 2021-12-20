@@ -2,11 +2,11 @@
   <div>
     <Theme></Theme>
     <div class="right">
-      <Headers></Headers>
+      <Headers :is-show="isShow"></Headers>
       <div class="main">
         <div class="w">
-          <el-carousel height="700px">
-            <el-carousel-item v-for="(item, index) in list_img" :key="index">
+          <el-carousel type="card" height="600px">
+            <el-carousel-item  v-for="(item, index) in list_img" :key="index">
               <h3 class="small">
                 <img :src="item.url" alt />
               </h3>
@@ -21,11 +21,13 @@
 <script>
 import Theme from "@/components/Theme";
 import Headers from "@/components/Headers";
+
 export default {
   name: 'Home',
   components: {Headers, Theme},
   data(){
     return{
+      isShow:false,
       list_img: [
         { url: require('../image/1.png') },
         { url: require('../image/2.png') },
@@ -51,6 +53,7 @@ export default {
 }
 .w {
   margin: 0 auto;
+  margin-top: 50px;
   width: 1303.2px;
 }
 
@@ -63,15 +66,16 @@ export default {
   text-align: center;
 }
 
-.el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
-}
-
-.el-carousel__item:nth-child(2n + 1) {
-  background-color: #d3dce6;
-}
+//.el-carousel__item:nth-child(2n) {
+//  background-color: #99a9bf;
+//}
+//
+//.el-carousel__item:nth-child(2n + 1) {
+//  background-color: #d3dce6;
+//}
 
 .small img {
+  margin-top: 50px;
   width: 100%;
   height: 100%;
 }

@@ -31,7 +31,9 @@
           </el-input>
         </div>
         <div class="down">
-
+          <img src="../image/表情.png">
+          <img src="../image/图片.png">
+          <img src="../image/截图.png">
         </div>
       </div>
     </div>

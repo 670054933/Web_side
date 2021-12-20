@@ -8,12 +8,13 @@
       :visible.sync="show"
       title="Personal Analysis"
       @opened="opened"
+      @close="close"
       width="650px">
     <div class="name">
       <p>{{ name }}</p>
     </div>
     <!--选择栏-->
-    <el-select v-model="value1" placeholder="Score">
+    <el-select v-model="form.subject" placeholder="Score" @change="change">
       <el-option
           v-for="item in options"
           :key="item.value"
@@ -23,98 +24,91 @@
       </el-option>
     </el-select>
 
-<!--    <el-select v-model="value2" placeholder="Rank">-->
-<!--      <el-option-->
-<!--          v-for="item in options"-->
-<!--          :key="item.value"-->
-<!--          :label="item.label"-->
-<!--          :value="item.value"-->
-<!--      >-->
-<!--      </el-option>-->
-<!--    </el-select>-->
-
     <!--折线图-->
     <div id="lineChart" ref="chart" :style="{ width: '600px', height: '360px' }"></div>
-    <!--名次显示框-->
-<!--    <div class="rank">-->
-<!--      Grade Rank:-->
-<!--      <input class='showRank' type="text" name="gradeRank" readonly="readonly" value="NO.1">-->
-<!--    </div>-->
-<!--    <div class="rank">-->
-<!--      Class Rank:-->
-<!--      <input class='showRank' type="text" name="classRank" readonly="readonly" value="NO.1">-->
-<!--    </div>-->
-<!--    <template #footer>-->
-<!--      <span class="dialog-footer">-->
-<!--        <el-button @click="dialogFormVisible = false">Cancel</el-button>-->
-<!--        <el-button type="primary" @click="dialogFormVisible = false"-->
-<!--        >Confirm</el-button-->
-<!--        >-->
-<!--      </span>-->
-<!--    </template>-->
   </el-dialog>
 
 </template>
 
 <script>
+import {queryGrade} from "@/api/api";
+
 export default {
   name: "Analysis",
   props: {
     grade:{
       type:Object,
+    },
+    term:{
+      type:String,
     }
   },
   data() {
     return {
       show:false,
+      form:{
+        semNo: "",
+        stuId: "",
+        subject:"total",
+      },
       // msg: "Welcome to Your Vue.js App",
       //选择栏选项数据
       options: [
         {
-          value: "option1",
+          value: "total",
           label: "Total",
         },
         {
-          value: "option2",
+          value: "chinese",
           label: "Chinese",
         },
         {
-          value: "option3",
+          value: "math",
           label: "Maths",
         },
         {
-          value: "option4",
+          value: "english",
           label: "English",
         },
         {
-          value: "option5",
+          value: "chemistry",
           label: "Chemistry",
         },
         {
-          value: "option6",
+          value: "physics",
           label: "Physics",
         },
         {
-          value: "option7",
+          value: "biology",
           label: "Biology",
         },
       ],
-      value1: "",
-      value2: "",
-      name: "Feliciano",
-
+      lineData: [],
+      name: "",
     };
   },
   mounted() {
-    // this.drawLine();
-
   },
 
   methods: {
     opened(){
       this.$nextTick(() => {
-        this.drawLine()
+        this.form.semNo = this.term
+        this.name = this.grade.stuname
+        this.form.stuId = this.grade.stuid
+        this.queryGrades()
+        setTimeout(() =>{
+          this.drawLine()
+        },200)
+
       })
+    },
+    change(){
+      this.queryGrades()
+      setTimeout(() =>{
+        this.drawLine()
+      },300)
+      console.log(this.form)
     },
     drawLine() {
       // 基于准备好的dom，初始化echarts实例
@@ -136,7 +130,7 @@ export default {
         },
         series: [
           {
-            data: [576, 569, 562, 580],
+            data: this.lineData,
             type: "line",
             //在数据点处显示数值
             label: {
@@ -155,6 +149,16 @@ export default {
     },
     close(){
       this.show = false
+      this.name = ""
+    },
+    queryGrades(param){
+      param={
+        ...this.form
+      }
+      queryGrade(param).then(res =>{
+        this.lineData = res.data.data;
+        console.log(this.lineData)
+      })
     },
   },
 }
