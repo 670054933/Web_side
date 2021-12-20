@@ -90,7 +90,7 @@
 import Theme from "@/components/Theme";
 import Headers from "@/components/Headers";
 import Analysis from "@/components/Analysis";
-import {queryStudent} from "@/api/api";
+import {queryStudent,scoreLevel} from "@/api/api";
 
 export default {
   name: "ScoreReport",
@@ -117,7 +117,7 @@ export default {
           label: "Chinese",
         },
         {
-          value: "maths",
+          value: "math",
           label: "Maths",
         },
         {
@@ -185,25 +185,20 @@ export default {
       ],
 
       //表格数据
+      pieChart:'',
       tableData: [],
-      pieData:[],
-      pieData1:[{value: 1048, name1: "A(85-100)"},
-        {value: 735, name: "B(70-84)"},
-        {value: 580, name: "C(60-69)"},
-        {value: 484, name: "D(0-59)"},],
-      pieData2:[{value: 234, name: "A(85-100)"},
-        {value: 235, name: "B(70-84)"},
-        {value: 520, name: "C(60-69)"},
-        {value: 354, name: "D(0-59)"},],
+      typeName:[],
+      typeNum:[],
+
     };
   },
 
   methods: {
     drawLine() {
       // 基于准备好的dom，初始化echarts实例
-      let pieChart = this.$echarts.init(document.getElementById("pieChart"))
+      this.pieChart = this.$echarts.init(document.getElementById("pieChart"))
       // 绘制图表
-      pieChart.setOption({
+      this.pieChart.setOption({
         title: {
           text: "Score statistics", //标题名字
           // subtext: "Fake Data",
@@ -226,7 +221,7 @@ export default {
             radius: "40%", // 饼图的半径，外半径为可视区尺寸（容器高宽中较小一项）的 40% 长度。
 
             //数据
-            data: this.pieData,
+            data: [],
             //高亮状态的扇区和标签样式。
             emphasis: {
               itemStyle: {
@@ -265,10 +260,30 @@ export default {
         console.log(this.tableData)
       })
     },
+    queryScoreLevel(param){
+      param = {
+        ...this.form
+      }
+      scoreLevel(param).then(res =>{
+        const getData = []
+        for (let i = 0; i < res.data.data.length;i++){
+          const obj = new Object();
+          obj.name = res.data.data[i].name;
+          obj.value = res.data.data[i].value;
+          getData[i] = obj;
+        }
+        this.pieChart.setOption({
+          series:[{
+            data:getData,
+          }]
+        })
+        console.log(res)
+      })
+    },
 
     change(){
       this.queryStudents();
-      this.pieData = this.pieData2;
+      this.queryScoreLevel()
       this.drawLine();
     },
 
@@ -282,10 +297,9 @@ export default {
     },
   },
   mounted() {
-    this.pieData = this.pieData1;
-    this.drawLine();
     this.queryStudents();
-
+    this.queryScoreLevel()
+    this.drawLine();
   },
 }
 </script>

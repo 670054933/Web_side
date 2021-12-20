@@ -32,11 +32,11 @@
         <p>Email registration</p>
         <el-form :model="addUser" :rules="addUserRules" ref="addUser">
           <el-form-item prop="email">
-            <el-input v-model="addUser.email" />
+            <el-input v-model="addUser.email"/>
           </el-form-item>
           <p>UserName</p>
           <el-form-item prop="userName">
-            <el-input v-model="addUser.userName" />
+            <el-input v-model="addUser.userName"/>
           </el-form-item>
         </el-form>
         <div class="o">
@@ -64,7 +64,7 @@
             <option value="class2">class2</option>
             <option value="class3">class3</option>
           </select>
-          <br />
+          <br/>
         </div>
         <div>
           <el-form :model="addUser" :rules="addUserRules" ref="addUser">
@@ -88,7 +88,7 @@
               <input
                   type="button"
                   value="Complete Registration"
-                  @click="gotoHome"
+                  @click="submitForm"
               />
             </div>
           </el-form>
@@ -100,6 +100,8 @@
 
 
 <script>
+import {register} from "@/api/api";
+
 export default {
   name: "register",
   data() {
@@ -199,8 +201,6 @@ export default {
         backgroundColor: "#434242",
         // 背景图片位置
         backgroundPosition: "center top",
-        userName: "",
-        password: "",
         isBtnLoading: false,
       },
       head: {
@@ -214,24 +214,35 @@ export default {
       },
     };
   },
-  created() {
-    if (
-        JSON.parse(localStorage.getItem("user")) &&
-        JSON.parse(localStorage.getItem("user")).userName
-    ) {
-      this.userName = JSON.parse(localStorage.getItem("user")).userName;
-      this.password = JSON.parse(localStorage.getItem("user")).password;
-    }
-  },
-  computed: {
-    btnText() {
-      if (this.isBtnLoading) return "登录中...";
-      return "登录";
-    },
-  },
+  // created() {
+  //   if (
+  //       JSON.parse(localStorage.getItem("user")) &&
+  //       JSON.parse(localStorage.getItem("user")).userName
+  //   ) {
+  //     this.userName = JSON.parse(localStorage.getItem("user")).userName;
+  //     this.password = JSON.parse(localStorage.getItem("user")).password;
+  //   }
+  // },
+  // computed: {
+  //   btnText() {
+  //     if (this.isBtnLoading) return "登录中...";
+  //     return "登录";
+  //   },
+  // },
   methods: {
-    gotoHome() {
-      this.$router.push({ path: "/Home" });
+    // gotoLogin() {
+    //   this.$router.push({ path: "/Login" });
+    // },
+    submitForm(param) {
+      param = {
+        ...this.addUser
+      }
+
+      register(param).then(res => {
+        console.log(res.data)
+
+      })
+
     },
   },
 };
@@ -243,6 +254,7 @@ export default {
   position: fixed;
   width: 100%;
 }
+
 .shadow {
   background-size: 100% 100%;
   height: 100%;
@@ -250,6 +262,7 @@ export default {
   width: 100%;
   background-color: rgba(67, 66, 66, 0.72);
 }
+
 .user {
   height: 500px;
   width: 350px;
@@ -259,10 +272,12 @@ export default {
   background-color: rgba(67, 66, 66, 0.76);
   font-size: 15px;
 }
+
 .user input {
   height: 30px;
   width: 350px;
 }
+
 .b input {
   position: relative;
   top: -40px;
@@ -271,27 +286,33 @@ export default {
   font-size: 15px;
   color: hsl(35, 98%, 56%);
 }
+
 .tag1 {
   float: left;
   margin-left: 200px;
 }
+
 .tag {
   float: left;
 }
+
 .o p {
   float: left;
   margin: 0px 10px;
 }
+
 .o select {
   float: left;
   height: 20px;
   width: 75px;
   margin: 0px 10px;
 }
+
 .cp {
   position: relative;
   top: -30px;
 }
+
 .p {
   position: relative;
   top: -40px;

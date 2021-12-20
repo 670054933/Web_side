@@ -13,23 +13,11 @@
         <!--  表单  -->
         <el-form ref="form" :model="form">
           <div class="input">
-            <el-row>
-              <el-col :span="11">
-                <el-form-item label="Phone number:" label-width="40%">
-                  <el-input :disabled="isModified" v-model="form.phoneNO"></el-input>
-                </el-form-item>
-              </el-col>
-              <el-col :span="11">
-                <el-form-item label="E-mail:" label-width="40%">
-                  <el-input :disabled="isModified" v-model="form.email"></el-input>
-                </el-form-item>
-              </el-col>
-            </el-row>
-            <el-form-item label="Subjects taught:" label-width="18%">
-              <el-input :disabled="isModified" v-model="form.subject"></el-input>
+            <el-form-item label="E-mail:" label-width="30%">
+              <el-input :disabled="isModified" v-model="form.email"></el-input>
             </el-form-item>
-            <el-form-item label="Professional ranks:" label-width="18%">
-              <el-input :disabled="isModified" v-model="form.profession"></el-input>
+            <el-form-item label="Subjects taught:" label-width="30%">
+              <el-input :disabled="isModified" v-model="form.subject"></el-input>
             </el-form-item>
           </div>
           <div class="button">
@@ -56,8 +44,8 @@ export default {
   },
   data() {
     return {
-      isShow:true,
-      isModified:true,
+      isShow: true,
+      isModified: true,
       //title数据
       name: "Ann",
       post: "Head teacher",
@@ -87,7 +75,7 @@ export default {
       this.isModified = false;
     },
     onConfirm() {
-      this.$confirm('Are you sure?').then(_=>{
+      this.$confirm('Are you sure?').then(_ => {
         console.log('submit!')
       })
       this.isModified = true;
@@ -143,26 +131,30 @@ export default {
   background-color: #fbfafa;
 }
 
-.input{
+.input {
   width: 100%;
   height: 66%;
+  margin-top: 50px;
 }
 
-.el-row{
+.el-row {
   margin-top: 3%;
   margin-bottom: 3%;
   height: 20%;
 }
+
 .el-form-item {
   margin-left: 1%;
   padding-bottom: 3%;
 }
+
 .el-input {
   width: 350px;
   height: 50px;
   background-color: #fbfafa;
 }
-.button{
+
+.button {
   width: 100%;
   height: 33%;
 }
@@ -179,11 +171,12 @@ export default {
   font-size: 20px;
   color: #51504e;
 }
-.main{
+
+.main {
   width: 100%;
-  overflow-y:auto;
+  overflow-y: auto;
   height: 700px;
-  border-right:1px solid #b0b5cd;
+  border-right: 1px solid #b0b5cd;
   border-bottom: 1px solid #b0b5cd;
 }
 </style>

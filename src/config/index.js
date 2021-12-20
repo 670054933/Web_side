@@ -4,10 +4,10 @@ module.exports ={
         assetsPublicPath: '/',
         proxyTable:{
             '/apis/':{
-                target:"http://45k1b40509.zicp.vip",
+                target:"http://team19.vipgz4.91tunnel.com",
                 changeOrigin:true,
                 pathRewrite:{
-                    '^/apis':'http://45k1b40509.zicp.vip'
+                    '^/apis':'http://team19.vipgz4.91tunnel.com/'
                 }
             }
         }

@@ -21,6 +21,7 @@
 <script>
 import Theme from "@/components/Theme";
 import Headers from "@/components/Headers";
+
 export default {
   name: 'Home',
   components: {Headers, Theme},

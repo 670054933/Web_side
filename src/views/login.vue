@@ -5,13 +5,13 @@
     <div :style="backgroundshadow" class="shadow">
       <div class="head">
         <el-menu
-          :default-active="activeIndex2"
-          class="el-menu-demo"
-          mode="horizontal"
-          @select="handleSelect"
-          background-color="#515151"
-          text-color="#faf4f4"
-          active-text-color="#fda200"
+            :default-active="activeIndex2"
+            class="el-menu-demo"
+            mode="horizontal"
+            @select="handleSelect"
+            background-color="#515151"
+            text-color="#faf4f4"
+            active-text-color="#fda200"
         >
           <div class="tag1">
             <el-menu-item>Home page</el-menu-item>
@@ -30,13 +30,13 @@
       <div class="user">
         <p>Teacher Login</p>
         <p>Account number</p>
-        <input type="text" v-model="userName" @click="login" />
+        <input type="text" v-model="form.userName"/>
         <p>Password</p>
-        <input type="text" v-model="password" @click="login" />
-        <br />
+        <input type="text" v-model="form.password"/>
+        <br/>
         <div class="b">
-          <input type="button" value="Login" />
-          <input type="button" value="Register" @click="gotoRegister" />
+          <input type="button" value="Login" @click="login"/>
+          <input type="button" value="Register" @click="gotoRegister"/>
         </div>
       </div>
     </div>
@@ -45,6 +45,8 @@
 
 
 <script>
+import {login} from "@/api/api";
+
 export default {
   name: "login",
   data() {
@@ -60,52 +62,66 @@ export default {
         backgroundColor: "#434242",
         // 背景图片位置
         backgroundPosition: "center top",
-        userName: "",
-        password: "",
         isBtnLoading: false,
+      },
+      form: {
+        userName: '',
+        password: '',
       },
       head: {
         activeIndex: "1",
         activeIndex2: "1",
       },
-      methods: {
-        handleSelect(key, keyPath) {
-          console.log(key, keyPath);
-        },
+      // methods: {
+      //   handleSelect(key, keyPath) {
+      //     console.log(key, keyPath);
+      //   },
+      // },
+      submitLogin() {
+
       },
     };
   },
-  created() {
-    if (
-      JSON.parse(localStorage.getItem("user")) &&
-      JSON.parse(localStorage.getItem("user")).userName
-    ) {
-      this.userName = JSON.parse(localStorage.getItem("user")).userName;
-      this.password = JSON.parse(localStorage.getItem("user")).password;
-    }
-  },
-  computed: {
-    btnText() {
-      if (this.isBtnLoading) return "登录中...";
-      return "登录";
-    },
-  },
+  // created() {
+  //   if (
+  //       JSON.parse(localStorage.getItem("user")) &&
+  //       JSON.parse(localStorage.getItem("user")).userName
+  //   ) {
+  //     this.userName = JSON.parse(localStorage.getItem("user")).userName;
+  //     this.password = JSON.parse(localStorage.getItem("user")).password;
+  //   }
+  // },
+  // computed: {
+  //   btnText() {
+  //     if (this.isBtnLoading) return "登录中...";
+  //     return "登录";
+  //   },
+  // },
   methods: {
-    login() {
-      if (!this.userName) {
-        this.$message.error("Please input your user name");
-        return;
+    login(param) {
+      param = {
+        ...this.form
       }
-      if (!this.password) {
-        this.$message.error("Please input your password");
-        return;
-      }
+      login(param).then(res => {
+        console.log(res.data.token)
+        if (res.status === 200) {
+          this.$store.commit('SET_TOKEN', res.data.token)
+          this.$store.commit('GET_USER', res.data.user)
+          this.$message({
+            message: '登陆成功',
+            type: 'success'
+          })
+          this.$router.push({name: 'Home'})
+        }
+      }).catch(function (error) {
+        console.log(error)
+      })
     },
     gotoRegister() {
-      this.$router.push({ path: "/register" });
+      this.$router.push({path: "/register"});
     },
   },
-};
+}
 </script>
 <style>
 .bgBackground {
@@ -114,6 +130,7 @@ export default {
   position: fixed;
   width: 100%;
 }
+
 .shadow {
   background-size: 100% 100%;
   height: 100%;
@@ -121,6 +138,7 @@ export default {
   width: 100%;
   background-color: rgba(67, 66, 66, 0.72);
 }
+
 .user {
   height: 330px;
   width: 330px;
@@ -130,10 +148,12 @@ export default {
   background-color: rgba(67, 66, 66, 0.76);
   font-size: 20px;
 }
+
 .user input {
   height: 30px;
   width: 300px;
 }
+
 .b input {
   height: 40px;
   width: 100px;
@@ -142,10 +162,12 @@ export default {
   font-size: 20px;
   color: #fda220;
 }
+
 .tag1 {
   float: left;
   margin-left: 200px;
 }
+
 .tag {
   float: left;
 }

@@ -14,7 +14,7 @@ import CommunicateDetail from "@/components/CommunicateDetail";
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   // mode:'history',
   // scrollBehavior:() => ({
   //   y:0
@@ -24,7 +24,6 @@ export default new Router({
       //登入
       path: '/',
       redirect:'/Login',
-
     },
     {
       path: '/Login',
@@ -43,6 +42,9 @@ export default new Router({
       path: '/Home',
       component:Home,
       name: 'Home',
+      meta: {
+        requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
+      }
     },
     // {
     //   //主页
@@ -55,33 +57,64 @@ export default new Router({
       path:'/ScoreReport',
       component: ScoreReport,
       name:'ScoreReport',
+      meta: {
+        requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
+      }
     },
     {
       path:'/SchoolAssignment',
       component:SchoolAssignment,
-      name:'SchoolAssignment'
+      name:'SchoolAssignment',
+      meta: {
+        requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
+      }
     },
     {
       //交流
       path:'/Communicate',
       component:Communicate,
-      name:'Communicate'
+      name:'Communicate',
+      meta: {
+        requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
+      }
     },
     {
       path:'/CommunicateDetail',
       component:CommunicateDetail,
-      name:'CommunicateDetail'
+      name:'CommunicateDetail',
+      meta: {
+        requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
+      }
     },
     {
       //信息
       path:'/Information',
       component:Information,
-      name:'Information'
+      name:'Information',
+      meta: {
+        requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
+      }
     },
+  ],
 
-  ]
 })
 
+// router.beforeEach((to, from, next) => {
+//   const token = store.state.token
+//   if (to.meta.requireAuth) { // 判断该路由是否需要登录权限
+//     if (token) { // 通过vuex state获取当前的token是否存在
+//       next()
+//     } else {
+//       console.log('该页面需要登陆')
+//       next({
+//         path: '/Login'
+//         // query: {redirect: to.fullPath} // 将跳转的路由path作为参数，登录成功后跳转到该路由
+//       })
+//     }
+//   } else {
+//     next()
+//   }
+// })
 
 // const router = new VueRouter({
 //   mode: 'history',
@@ -89,4 +122,4 @@ export default new Router({
 //   routes
 // })
 
-// export default router
+export default router
