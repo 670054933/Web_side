@@ -14,7 +14,7 @@
             active-text-color="#fda200"
         >
           <div class="tag1">
-            <el-menu-item @click="gotoHome">Home page</el-menu-item>
+            <el-menu-item @click="">Home page</el-menu-item>
           </div>
           <div class="tag">
             <el-menu-item>About us</el-menu-item>
@@ -29,72 +29,57 @@
       </div>
       <div class="user">
         <p>Teacher register</p>
-        <p>Email registration</p>
-        <el-form :model="addUser" :rules="addUserRules" ref="addUser">
-          <el-form-item prop="email">
-            <el-input v-model="addUser.email"/>
+        <el-form :rules="addUserRules" ref="addUser">
+          <el-form-item label="Email registration" prop="email">
+            <el-input v-model="form.email"/>
           </el-form-item>
-          <p>UserName</p>
-          <el-form-item prop="userName">
-            <el-input v-model="addUser.userName"/>
+          <el-form-item label="UserName" prop="userName">
+            <el-input v-model="form.userName"/>
           </el-form-item>
-        </el-form>
-        <div class="o">
-          <p>Grade</p>
-          <select name="Grade">
-            <option
-                selected="selected"
-                disabled="disabled"
-                style="display: none"
-                value=""
-            ></option>
-            <option value="Grade10">Grade10</option>
-            <option value="Grade11">Grade11</option>
-            <option value="Grade12">Grade12</option>
-          </select>
-          <p>Class</p>
-          <select name="Class">
-            <option
-                selected="selected"
-                disabled="disabled"
-                style="display: none"
-                value=""
-            ></option>
-            <option value="class1">class1</option>
-            <option value="class2">class2</option>
-            <option value="class3">class3</option>
-          </select>
-          <br/>
-        </div>
-        <div>
-          <el-form :model="addUser" :rules="addUserRules" ref="addUser">
-            <p>Set password</p>
-            <el-form-item prop="password">
-              <el-input
-                  v-model="addUser.password"
-                  type="password"
-                  show-password
-              />
-            </el-form-item>
-            <p>Confirm password</p>
-            <el-form-item prop="Cpassword">
-              <el-input
-                  v-model="addUser.Cpassword"
-                  type="Cpassword"
-                  show-password
-              />
-            </el-form-item>
-            <div class="b">
-              <input
-                  type="button"
-                  value="Complete Registration"
-                  @click="submitForm"
-              />
-            </div>
-          </el-form>
-        </div>
-      </div>
+          <el-row>
+            <el-col span="11">
+          <el-form-item label="Subject" prop="subject">
+            <el-select v-model="form.subject" filterable placeholder="Subject" >
+              <el-option
+                  v-for="item in Subjects"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+              >
+              </el-option>
+            </el-select>
+          </el-form-item>
+            </el-col>
+            <el-col span="11">
+          <el-form-item label="Class" prop="classNo">
+            <el-select v-model="form.classNO" placeholder="class" clearable filterable
+                       style="margin-right: 15px;width: 100px">
+              <el-option label="Class1" value="1"></el-option>
+              <el-option label="Class2" value="2"></el-option>
+            </el-select>
+          </el-form-item>
+            </el-col>
+          </el-row>
+          <el-form-item label="Set password" prop="password">
+            <el-input
+                v-model="form.password"
+                type="password"
+                show-password
+            />
+          </el-form-item>
+          <el-form-item label="Confirm password" prop="Cpassword">
+            <el-input
+                v-model="Cpassword"
+                type="Cpassword"
+                show-password
+            />
+          </el-form-item>
+          <el-form-item>
+            <el-button @click="submitForm">Complete Registration</el-button>
+          </el-form-item>
+      </el-form>
     </div>
+  </div>
   </div>
 </template>
 
@@ -127,19 +112,47 @@ export default {
       const regPass = /^([a-zA-Z0-9_-])+/;
       if (value === "") {
         cb(new Error("请再次输入密码"));
-      } else if (value !== this.addUser.password) {
+      } else if (value !== this.form.password) {
         cb(new Error("两次输入密码不一致!"));
       } else {
         cb();
       }
     };
     return {
-      addUser: {
+      form: {
         username: "",
         password: "",
-        Cpassword: "",
+        subject: '',
         email: "",
+        classNO: ''
       },
+      Cpassword: "",
+      Subjects: [
+        {
+          value: "chinese",
+          label: "Chinese",
+        },
+        {
+          value: "math",
+          label: "Maths",
+        },
+        {
+          value: "english",
+          label: "English",
+        },
+        {
+          value: "chemistry",
+          label: "Chemistry",
+        },
+        {
+          value: "physics",
+          label: "Physics",
+        },
+        {
+          value: "biology",
+          label: "Biology",
+        },
+      ],
       addUserRules: {
         password: [
           {
@@ -235,7 +248,7 @@ export default {
     // },
     submitForm(param) {
       param = {
-        ...this.addUser
+        ...this.submitForm
       }
 
       register(param).then(res => {
@@ -247,7 +260,7 @@ export default {
   },
 };
 </script>
-<style scoped>
+<style lang="less" scoped>
 .bgBackground {
   background-size: 100% 100%;
   height: 100%;
@@ -265,7 +278,7 @@ export default {
 
 .user {
   height: 500px;
-  width: 350px;
+  //width: 350px;
   padding-left: 20px;
   margin: 50px 600px;
   color: #fcfafa;
@@ -273,19 +286,10 @@ export default {
   font-size: 15px;
 }
 
-.user input {
-  height: 30px;
-  width: 350px;
-}
-
-.b input {
-  position: relative;
-  top: -40px;
-  width: 250px;
-  background-color: rgba(67, 66, 66, 0.8);
-  font-size: 15px;
-  color: hsl(35, 98%, 56%);
-}
+/*.user input {*/
+/*  height: 30px;*/
+/*  width: 350px;*/
+/*}*/
 
 .tag1 {
   float: left;
@@ -296,25 +300,4 @@ export default {
   float: left;
 }
 
-.o p {
-  float: left;
-  margin: 0px 10px;
-}
-
-.o select {
-  float: left;
-  height: 20px;
-  width: 75px;
-  margin: 0px 10px;
-}
-
-.cp {
-  position: relative;
-  top: -30px;
-}
-
-.p {
-  position: relative;
-  top: -40px;
-}
 </style>
