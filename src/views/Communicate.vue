@@ -10,18 +10,18 @@
         <div class="choice">
           <div class="class_top">
             <div class="class1" @click="class11_student">
-              <p class="s">Students in Class 11</p>
+              <p class="s">Students in Class 1</p>
             </div>
             <div class="class2" @click="class11_parent">
-              <p class="p">Parents in Class 11</p>
+              <p class="p">Parents in Class 1</p>
             </div>
           </div>
           <div class="class_bottom">
             <div class="class1" @click="class12_student">
-              <p class="s">Students in Class 12</p>
+              <p class="s">Students in Class 2</p>
             </div>
             <div class="class2" @click="class12_parent">
-              <p class="p">Parents in Class 12</p>
+              <p class="p">Parents in Class 2</p>
             </div>
           </div>
         </div>
@@ -33,6 +33,7 @@
 <script>
 import Theme from "@/components/Theme";
 import Headers from "@/components/Headers";
+import {querySfromC} from '@/api/api';
 export default {
   name: "Communicate",
   components: {Theme,Headers},
@@ -43,17 +44,30 @@ export default {
   },
   methods: {
     class11_student() {
-      console.log('class11 students chatting room')
+      // console.log('class1 students chatting room')
+      this.querySname(1)
     },
     class11_parent() {
-      console.log('class11 parents chatting room')
+      // console.log('class1 parents chatting room')
+      this.querySname(1)
     },
     class12_student() {
-      console.log('class12 students chatting room')
+      // console.log('class2 students chatting room')
+      this.querySname(2)
     },
     class12_parent() {
-      console.log('class12 parents chatting room')
+      // console.log('class2 parents chatting room')
+      this.querySname(2)
     },
+    querySname(param){
+      querySfromC({classNo: param}).then(res =>{
+        console.log(res)
+        this.$router.push({
+          path: "/CommunicateDetail",
+          param: { studentList: res.data.data},
+        })
+      })
+    }
   },
 }
 </script>

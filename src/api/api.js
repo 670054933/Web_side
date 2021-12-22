@@ -6,6 +6,7 @@ const api ={
     scoreLevel:'/ScoreLevel',
     login:'/login',
     register:'/register',
+    querySfromC:'/AllStudentFromClass',
 }
 
 export function queryStudent(param){
@@ -43,6 +44,14 @@ export function login(param){
 export function register(param){
     return service({
         url:api.register,
+        method:'post',
+        data:param
+    })
+}
+
+export function querySfromC(param){
+    return service({
+        url:api.querySfromC,
         method:'post',
         data:param
     })

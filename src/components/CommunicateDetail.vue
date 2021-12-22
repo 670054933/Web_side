@@ -47,15 +47,16 @@ import Header from "@/components/Headers";
 export default {
   name: "CommunicateDetail",
   components: {Theme, Header},
-  props: {
-    tableData: {
-      type: Array,
-    }
-  },
   data() {
     return {
       textarea: '',
     }
+  },
+  created() {
+    var studentList = this.$route.params.studentList;
+  },
+  mounted(){
+    console.log(this.$route.params.studentList)
   }
 }
 </script>
