@@ -266,7 +266,7 @@ export default {
     float: left;
     height: 50px;
     width: 50px;
-    margin-left:
+    margin-left: 30%;
     //padding-top: 15%;
   }
   .user {
