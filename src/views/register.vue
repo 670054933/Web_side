@@ -13,8 +13,8 @@
             text-color="#faf4f4"
             active-text-color="#fda200"
         >
-          <div class="tag1">
-            <el-menu-item @click="">Home page</el-menu-item>
+          <div class="tag1" @click="gotoHomePage">
+            <el-menu-item>Home page</el-menu-item>
           </div>
           <div class="tag">
             <el-menu-item>About us</el-menu-item>
@@ -53,7 +53,7 @@
             <el-col span="11">
           <el-form-item label="Class" prop="classNo">
             <el-select v-model="form.classNO" placeholder="class" clearable filterable
-                       style="margin-right: 15px;width: 100px">
+                       style="margin-right: 15px">
               <el-option label="Class1" value="1"></el-option>
               <el-option label="Class2" value="2"></el-option>
             </el-select>
@@ -219,33 +219,16 @@ export default {
       head: {
         activeIndex: "1",
         activeIndex2: "1",
-        // },
-        // methods: {
-        //   handleSelect(key, keyPath) {
-        //     console.log(key, keyPath);
-        //   },
       },
     };
   },
-  // created() {
-  //   if (
-  //       JSON.parse(localStorage.getItem("user")) &&
-  //       JSON.parse(localStorage.getItem("user")).userName
-  //   ) {
-  //     this.userName = JSON.parse(localStorage.getItem("user")).userName;
-  //     this.password = JSON.parse(localStorage.getItem("user")).password;
-  //   }
-  // },
-  // computed: {
-  //   btnText() {
-  //     if (this.isBtnLoading) return "登录中...";
-  //     return "登录";
-  //   },
-  // },
   methods: {
     // gotoLogin() {
     //   this.$router.push({ path: "/Login" });
     // },
+    gotoHomePage(){
+      this.$router.push({ path: "/HomePage" });
+    },
     submitForm(param) {
       param = {
         ...this.submitForm
@@ -263,16 +246,17 @@ export default {
 <style lang="less" scoped>
 .bgBackground {
   background-size: 100% 100%;
-  height: 100%;
+  height: 98%;
   position: fixed;
-  width: 100%;.shadow {
-  background-size: 100% 100%;
-  height: 100%;
-  position: fixed;
-  width: 100%;
-  background-color: rgba(67, 66, 66, 0.72);
-}
+  width: 1520px;
 
+  .shadow {
+    background-size: 100% 100%;
+    height: 98%;
+    position: fixed;
+    width: 1520px;
+    background-color: rgba(67, 66, 66, 0.72);
+  }
   .user {
     height: 500px;
     //width: 350px;

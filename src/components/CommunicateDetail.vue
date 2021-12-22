@@ -47,11 +47,6 @@ import Header from "@/components/Headers";
 export default {
   name: "CommunicateDetail",
   components: {Theme, Header},
-  props: {
-    tableData: {
-      type: Array,
-    }
-  },
   data() {
     return {
       textarea: '',

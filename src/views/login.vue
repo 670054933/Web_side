@@ -1,8 +1,6 @@
-/* eslint-disable space-before-blocks */
-/* eslint-disable space-before-blocks */
 <template>
   <div :style="background" class="bgBackground">
-    <div :style="backgroundshadow" class="shadow">
+    <div class="shadow">
       <div class="head">
         <el-menu
             :default-active="activeIndex2"
@@ -13,7 +11,7 @@
             text-color="#faf4f4"
             active-text-color="#fda200"
         >
-          <div class="tag1">
+          <div class="tag1" @click="gotoHomePage">
             <el-menu-item>Home page</el-menu-item>
           </div>
           <div class="tag">
@@ -30,7 +28,7 @@
       <div class="user">
         <p>Teacher Login</p>
         <p>Account number</p>
-        <input type="text" v-model="form.userName"/>
+        <input type="text" v-model="form.email"/>
         <p>Password</p>
         <input type="text" v-model="form.password"/>
         <br/>
@@ -65,56 +63,36 @@ export default {
         isBtnLoading: false,
       },
       form: {
-        userName: '',
+        email: '',
         password: '',
       },
       head: {
         activeIndex: "1",
         activeIndex2: "1",
       },
-      // methods: {
-      //   handleSelect(key, keyPath) {
-      //     console.log(key, keyPath);
-      //   },
-      // },
       submitLogin() {
 
       },
     };
   },
-  // created() {
-  //   if (
-  //       JSON.parse(localStorage.getItem("user")) &&
-  //       JSON.parse(localStorage.getItem("user")).userName
-  //   ) {
-  //     this.userName = JSON.parse(localStorage.getItem("user")).userName;
-  //     this.password = JSON.parse(localStorage.getItem("user")).password;
-  //   }
-  // },
-  // computed: {
-  //   btnText() {
-  //     if (this.isBtnLoading) return "登录中...";
-  //     return "登录";
-  //   },
-  // },
   methods: {
     login(param) {
       param = {
         ...this.form
       }
       login(param).then(res => {
-        console.log(res.data.token)
-        if (res.status === 200) {
-          this.$store.commit('SET_TOKEN', res.data.token)
-          this.$store.commit('GET_USER', res.data.user)
+        console.log(res)
+        if (res.data.code === 0) {
+          this.$store.commit('SET_TOKEN', res.data.tokenValue)
+          this.$store.commit('GET_USER', res.data.username)
           this.$message({
-            message: '登陆成功',
+            message: res.data.msg,
             type: 'success'
           })
-          // this.$router.push({name: 'Home'})
+          this.$router.push({name: 'Home'})
         }else {
           this.$message({
-            message: '登陆失败',
+            message: res.data.msg,
             type: 'warning'
           })
         }
@@ -125,22 +103,25 @@ export default {
     gotoRegister() {
       this.$router.push({path: "/register"});
     },
+    gotoHomePage(){
+      this.$router.push({ path: "/HomePage" });
+    }
   },
 }
 </script>
-<style>
+<style lang="less" scoped>
 .bgBackground {
   background-size: 100% 100%;
-  height: 100%;
+  height: 98%;
   position: fixed;
-  width: 100%;
+  width: 1520px;
 }
 
 .shadow {
   background-size: 100% 100%;
-  height: 100%;
+  height: 98%;
   position: fixed;
-  width: 100%;
+  width: 1520px;
   background-color: rgba(67, 66, 66, 0.72);
 }
 
