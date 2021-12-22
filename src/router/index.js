@@ -23,7 +23,7 @@ const router = new Router({
     {
       //登入
       path: '/',
-      redirect:'/Login',
+      redirect:'/HomePage',
     },
     {
       path: '/Login',
@@ -46,12 +46,12 @@ const router = new Router({
         requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
       }
     },
-    // {
-    //   //主页
-    //   path:'/HomePage',
-    //   component: HomePage,
-    //   name:'HomePage',
-    // },
+    {
+      //主页
+      path:'/HomePage',
+      component: HomePage,
+      name:'HomePage',
+    },
     {
       //成绩报告
       path:'/ScoreReport',

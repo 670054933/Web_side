@@ -1,80 +1,121 @@
+/* eslint-disable space-before-blocks */
+/* eslint-disable space-before-blocks */
 <template>
-  <el-row class="tac">
-    <el-col :span="12">
-      <el-aside width="200px">
-        <div class="avater_box">
-          <img src="@/image/头像.png" alt=""/>
-        </div>
+  <div :style="background" class="bgBackground">
+    <div :style="backgroundshadow" class="shadow">
+      <div class="head">
         <el-menu
-            active-text-color="#ffd04b"
-            background-color="#656161"
-            text-color="#faf4f4"
-            :router="true"
+          :default-active="activeIndex2"
+          class="el-menu-demo"
+          mode="horizontal"
+          @select="handleSelect"
+          background-color="#515151"
+          text-color="#faf4f4"
+          active-text-color="#fda200"
         >
-          <el-menu-item index="/Home">
-            <!--一级菜单的模板区-->
-            <template #title>
-              <!--图标-->
-              <!--改变图标颜色 style="color:#ffd04b"-->
-              <i class="el-icon-s-home"></i>
-              <!--文本-->
-              <span>Home Page</span>
-            </template>
-          </el-menu-item>
-
-          <el-menu-item index="/ScoreStatistics">
-            <template #title>
-              <i class="el-icon-s-order"></i>
-              <span>Score Report</span>
-            </template>
-          </el-menu-item>
-
-          <el-menu-item index="3">
-            <i class="el-icon-reading"></i>
-            <span>School Assignment</span>
-          </el-menu-item>
-
-          <el-menu-item index="/Communicate">
-            <i class="el-icon-chat-line-round"></i>
-            <span>Communicate</span>
-          </el-menu-item>
-
-          <el-menu-item index="/Information">
-            <i class="el-icon-s-custom"></i>
-            <span>Information</span>
-          </el-menu-item>
+          <div class="tag1" @click="gotoHomePage">
+            <el-menu-item>Home page</el-menu-item>
+          </div>
+          <div class="tag">
+            <el-menu-item>About us</el-menu-item>
+          </div>
+          <div class="tag">
+            <el-menu-item>Customer Service</el-menu-item>
+          </div>
+          <div class="tag">
+            <el-menu-item>Forget Password</el-menu-item>
+          </div>
         </el-menu>
-      </el-aside>
-    </el-col>
-    <router-view></router-view>
-  </el-row>
+      </div>
+      <div class="slogan">
+        <h2 style="color: #fda220;font-size: 70px;margin-top: 209px;text-align: center;opacity: 60%">It's all about education</h2>
+      </div>
+      <div class="b">
+        <input type="button" value="Teacher" style="opacity: 60%" @click="gotoLogin" />
+        <input type="button" value="Student" style="opacity: 60%" />
+      </div>
+    </div>
+  </div>
 </template>
+
 
 <script>
 export default {
-  name: "HomePage",
+  data() {
+    return {
+      background: {
+        // 背景图片地址
+        backgroundImage: "url(" + require("@/image/背景.jpg") + ")",
+        // 背景图片是否重复
+        backgroundRepeat: "no-repeat",
+        // 背景图片大小
+        backgroundSize: "cover",
+        // 背景颜色
+        backgroundColor: "#434242",
+        // 背景图片位置
+        backgroundPosition: "center top",
+        email: "",
+        password: "",
+        isBtnLoading: false,
+      },
+      head: {},
+      backgroundshadow: "",
+      activeIndex: "1",
+      activeIndex2: "1",
+      handleSelect: "",
+      select: "",
+      methods: {
+        handleSelect(key, keyPath) {
+          console.log(key, keyPath);
+        },
+      },
+    };
+  },
   methods: {
-  }
-}
+    gotoLogin() {
+      this.$router.push({ path: "/Login" });
+    },
+    gotoHomePage(){
+      this.$router.push({ path: "/HomePage" });
+    }
+  },
+};
 </script>
-
 <style lang="less" scoped>
-.avater_box {
+.bgBackground {
+  background-size: 100% 100%;
+  height: 98%;
+  position: fixed;
+  width: 1520px;
+}
+.shadow {
+  background-size: 100% 100%;
+  height: 98%;
+  position: fixed;
+  width: 1520px;
+  background-color: rgba(67, 66, 66, 0.72);
+}
+.b {
+  text-align: center;
+  margin: 0;
+}
+.b input {
   height: 80px;
-  width: 80px;
-
-  margin: 30px 50px; //调整头像位置
-
-  border: 1px solid #eee; //加边框
-  border-radius: 50%; //圆角边框
-  padding: 2px; //图片与边框之间有间隙
-
-  img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%; //图片变为圆角图片
-    background-color: #eee;
-  }
+  width: 200px;
+  background-color: rgba(82, 80, 80, 0.6);
+  font-size: 30px;
+  color: #fda220;
+  border-radius: 10px;
+  border-color: #c9e1e4;
+  border-width: 0.3px;
 }
 
+.tag1 {
+  float: left;
+  margin-left: 200px;
+}
+
+.tag {
+  float: left;
+}
 </style>
