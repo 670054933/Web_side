@@ -27,6 +27,9 @@
           </div>
         </el-menu>
       </div>
+      <div class="return">
+        <img src="../image/返回.png" height="48" width="48" @click="gotoHomePage">
+      </div>
       <div class="user">
         <p>Teacher register</p>
         <el-form :rules="addUserRules" ref="addUser">
@@ -37,27 +40,27 @@
             <el-input v-model="form.userName"/>
           </el-form-item>
           <el-row>
-            <el-col span="11">
-          <el-form-item label="Subject" prop="subject">
-            <el-select v-model="form.subject" filterable placeholder="Subject" >
-              <el-option
-                  v-for="item in Subjects"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-              >
-              </el-option>
-            </el-select>
-          </el-form-item>
+            <el-col span="12">
+              <el-form-item label="Subject" prop="subject">
+                <el-select v-model="form.subject" filterable placeholder="Subject">
+                  <el-option
+                      v-for="item in Subjects"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value"
+                  >
+                  </el-option>
+                </el-select>
+              </el-form-item>
             </el-col>
-            <el-col span="11">
-          <el-form-item label="Class" prop="classNo">
-            <el-select v-model="form.classNO" placeholder="class" clearable filterable
-                       style="margin-right: 15px">
-              <el-option label="Class1" value="1"></el-option>
-              <el-option label="Class2" value="2"></el-option>
-            </el-select>
-          </el-form-item>
+            <el-col span="12">
+              <el-form-item label="Class" prop="classNo">
+                <el-select v-model="form.classNO" placeholder="class" clearable filterable
+                           style="margin-right: 15px">
+                  <el-option label="Class1" value="1"></el-option>
+                  <el-option label="Class2" value="2"></el-option>
+                </el-select>
+              </el-form-item>
             </el-col>
           </el-row>
           <el-form-item label="Set password" prop="password">
@@ -75,11 +78,11 @@
             />
           </el-form-item>
           <el-form-item>
-            <el-button @click="submitForm">Complete Registration</el-button>
+            <el-button class="confirm" @click="submitForm">Complete Registration</el-button>
           </el-form-item>
-      </el-form>
+        </el-form>
+      </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -226,8 +229,8 @@ export default {
     // gotoLogin() {
     //   this.$router.push({ path: "/Login" });
     // },
-    gotoHomePage(){
-      this.$router.push({ path: "/HomePage" });
+    gotoHomePage() {
+      this.$router.push({path: "/HomePage"});
     },
     submitForm(param) {
       param = {
@@ -238,8 +241,10 @@ export default {
         console.log(res.data)
 
       })
-
     },
+    gotoHomePage(){
+      this.$router.push({ path: "/HomePage" });
+    }
   },
 };
 </script>
@@ -257,17 +262,23 @@ export default {
     width: 1520px;
     background-color: rgba(67, 66, 66, 0.72);
   }
+  .return{
+    float: left;
+    height: 50px;
+    width: 50px;
+    margin-left:
+    //padding-top: 15%;
+  }
   .user {
-    height: 500px;
+    height: 610px;
     //width: 350px;
     padding-left: 20px;
-    margin: 50px 600px;
+    margin: 50px 530px;
     color: #fcfafa;
     background-color: rgba(67, 66, 66, 0.76);
-    font-size: 15px;
+    font-size: 20px;
   }
 }
-
 
 
 /*.user input {*/
@@ -283,5 +294,13 @@ export default {
 .tag {
   float: left;
 }
-
+.el-input{
+  width: 98%;
+}
+.el-select{
+  margin-right: 20px;
+}
+.confirm {
+  margin-left: 25%;
+}
 </style>

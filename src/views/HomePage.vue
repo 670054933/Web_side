@@ -87,12 +87,14 @@ export default {
   height: 98%;
   position: fixed;
   width: 1520px;
+  //width: 100%;
 }
 .shadow {
   background-size: 100% 100%;
   height: 98%;
   position: fixed;
   width: 1520px;
+  //width: 100%;
   background-color: rgba(67, 66, 66, 0.72);
 }
 .b {
@@ -108,6 +110,8 @@ export default {
   border-radius: 10px;
   border-color: #c9e1e4;
   border-width: 0.3px;
+  margin-left: 100px;
+  margin-right: 100px;
 }
 
 .tag1 {

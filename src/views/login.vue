@@ -25,6 +25,9 @@
           </div>
         </el-menu>
       </div>
+      <div class="return">
+        <img src="../image/返回.png" height="48" width="48" @click="gotoHomePage">
+      </div>
       <div class="user">
         <p>Teacher Login</p>
         <p>Account number</p>
@@ -124,7 +127,13 @@ export default {
   width: 1520px;
   background-color: rgba(67, 66, 66, 0.72);
 }
-
+.return{
+  float: left;
+  height: 1px;
+  width: 50px;
+  margin-left: 35%;
+  padding-top: 18%;
+}
 .user {
   height: 330px;
   width: 330px;
