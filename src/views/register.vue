@@ -265,10 +265,7 @@ export default {
   background-size: 100% 100%;
   height: 100%;
   position: fixed;
-  width: 100%;
-}
-
-.shadow {
+  width: 100%;.shadow {
   background-size: 100% 100%;
   height: 100%;
   position: fixed;
@@ -276,15 +273,18 @@ export default {
   background-color: rgba(67, 66, 66, 0.72);
 }
 
-.user {
-  height: 500px;
-  //width: 350px;
-  padding-left: 20px;
-  margin: 50px 600px;
-  color: #fcfafa;
-  background-color: rgba(67, 66, 66, 0.76);
-  font-size: 15px;
+  .user {
+    height: 500px;
+    //width: 350px;
+    padding-left: 20px;
+    margin: 50px 600px;
+    color: #fcfafa;
+    background-color: rgba(67, 66, 66, 0.76);
+    font-size: 15px;
+  }
 }
+
+
 
 /*.user input {*/
 /*  height: 30px;*/
