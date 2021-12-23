@@ -28,7 +28,7 @@
         </el-menu>
       </div>
       <div class="return">
-        <img src="../image/返回.png" height="48" width="48" @click="gotoHomePage">
+        <img src="../image/返回.png" height="48" width="48" @click="gotoLogin">
       </div>
       <div class="user">
         <p>Teacher register</p>
@@ -232,6 +232,9 @@ export default {
     gotoHomePage() {
       this.$router.push({path: "/HomePage"});
     },
+    gotoLogin() {
+      this.$router.push({path: "/Login"});
+    },
     submitForm(param) {
       param = {
         ...this.submitForm
@@ -242,9 +245,6 @@ export default {
 
       })
     },
-    gotoHomePage(){
-      this.$router.push({ path: "/HomePage" });
-    }
   },
 };
 </script>
@@ -262,13 +262,6 @@ export default {
     width: 1520px;
     background-color: rgba(67, 66, 66, 0.72);
   }
-  .return{
-    float: left;
-    height: 50px;
-    width: 50px;
-    margin-left: 30%;
-    //padding-top: 15%;
-  }
   .user {
     height: 610px;
     //width: 350px;
@@ -279,12 +272,23 @@ export default {
     font-size: 20px;
   }
 }
-
-
+.return{
+  float: left;
+  height: 50px;
+  width: 50px;
+  margin-left: 30%;
+  margin-top: 300px;
+}
+/deep/ .el-form-item{
+  height: 80px;
+}
 /*.user input {*/
 /*  height: 30px;*/
 /*  width: 350px;*/
 /*}*/
+/deep/ .el-row{
+  height: 80px;
+}
 
 .tag1 {
   float: left;
@@ -295,7 +299,8 @@ export default {
   float: left;
 }
 .el-input{
-  width: 98%;
+  width: 96%;
+  height: 30px;
 }
 .el-select{
   margin-right: 20px;

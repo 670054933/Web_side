@@ -64,7 +64,7 @@ export default {
         console.log(res)
         this.$router.push({
           path: "/CommunicateDetail",
-          param: { studentList: res.data.data},
+          query: { studentList: res.data.data},
         })
       })
     }

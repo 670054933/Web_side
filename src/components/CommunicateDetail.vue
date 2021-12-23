@@ -15,7 +15,7 @@
                 width="55">
             </el-table-column>
             <el-table-column
-                prop="name"
+                prop="stuName"
                 label="All members"
                 width="143">
             </el-table-column>
@@ -50,13 +50,14 @@ export default {
   data() {
     return {
       textarea: '',
+      tableData:'',
     }
   },
   created() {
-    var studentList = this.$route.params.studentList;
+    this.tableData = this.$route.query.studentList;
+
   },
   mounted(){
-    console.log(this.$route.params.studentList)
   }
 }
 </script>
