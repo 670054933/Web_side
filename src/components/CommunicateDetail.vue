@@ -2,7 +2,7 @@
   <div>
     <Theme></Theme>
     <div class="right">
-      <Header></Header>
+      <Header :isShow="isShow"></Header>
       <div class="main">
         <div class="S_List">
           <el-table
@@ -22,18 +22,29 @@
           </el-table>
         </div>
         <div class="up">
-          <el-input
-              type="textarea"
-              :rows="21"
-              placeholder="Please input the message"
-              v-model="textarea"
-          >
-          </el-input>
+          <!--v-for进行列表渲染，使用v-model来处理用户输入，使用v-on来绑定点击事件。-->
+          <ul>
+            <li v-for="item in message_array">{{ item }}</li>
+          </ul>
         </div>
         <div class="down">
-          <img src="../image/表情.png">
-          <img src="../image/图片.png">
-          <img src="../image/截图.png">
+          <div class="expression">
+            <img src="../image/表情.png">
+            <img src="../image/图片.png">
+            <img src="../image/截图.png" id="screenshots">
+          </div>
+          <div class="input">
+            <el-input
+                type="textarea"
+                :rows="5"
+                placeholder="Please input the message"
+                v-model="textarea"
+            >
+            </el-input>
+          </div>
+          <div class="sendbox">
+            <el-button class="send" v-on:click="dealMessage">Send</el-button>
+          </div>
         </div>
       </div>
     </div>
@@ -49,16 +60,24 @@ export default {
   components: {Theme, Header},
   data() {
     return {
+      isShow: true,
       textarea: '',
-      tableData:'',
+      message_array: [],
+      tableData: '',
+    }
+  },
+  methods: {
+    dealMessage: function () {
+      this.message_array.push(this.textarea);
+      this.textarea = '';
     }
   },
   created() {
     this.tableData = this.$route.query.studentList;
 
   },
-  mounted(){
-  }
+  mounted() {
+  },
 }
 </script>
 
@@ -87,14 +106,47 @@ export default {
 }
 
 .up {
-  width: 1103.2px;
+  width: 1100px;
   height: 450px;
   border-bottom: 1px solid #b0b5cd;
   float: left;
 }
-.down{
-  width: 1103.2px;
+.li{
+  font-size: 12px;
+}
+.down {
+  width: 1100px;
   height: 247px;
   float: left;
+}
+
+.expression {
+  width: 500px;
+  height: 50px;
+}
+
+.input {
+  width: 1100px;
+  height: 125px;
+}
+
+#screenshots {
+  height: 40px;
+  width: 40px;
+  margin-bottom: 3px;
+  margin-left: 4px;
+}
+
+.sendbox {
+  width: 100px;
+  height: 40px;
+  float: right;
+  margin-right: 5px;
+}
+
+.send {
+  color: white;
+  background-color: dodgerblue;
+  font-size: 20px;
 }
 </style>

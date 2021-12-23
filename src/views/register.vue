@@ -226,9 +226,6 @@ export default {
     };
   },
   methods: {
-    // gotoLogin() {
-    //   this.$router.push({ path: "/Login" });
-    // },
     gotoHomePage() {
       this.$router.push({path: "/HomePage"});
     },
@@ -307,5 +304,7 @@ export default {
 }
 .confirm {
   margin-left: 25%;
+  color: #fda220;
+  background-color: rgba(67, 66, 66, 0.8);
 }
 </style>
