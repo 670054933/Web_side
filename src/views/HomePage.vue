@@ -82,13 +82,14 @@ export default {
 <style lang="less" scoped>
 .bgBackground {
   background-size: 100% 100%;
-  height: 98%;
+  //height: 98%;
   width: 1520px;
+  height: 760px;
   //width: 100%;
 }
 .shadow {
   background-size: 100% 100%;
-  height: 98%;
+  height: 100%;
   width: 1520px;
   //width: 100%;
   background-color: rgba(67, 66, 66, 0.72);
