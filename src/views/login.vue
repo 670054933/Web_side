@@ -21,7 +21,7 @@
             <el-menu-item>Customer Service</el-menu-item>
           </div>
           <div class="tag">
-            <el-menu-item>Forget Password</el-menu-item>
+            <el-menu-item @click="changePassword">Forget Password</el-menu-item>
           </div>
         </el-menu>
       </div>
@@ -40,16 +40,20 @@
           <input type="button" value="Register" @click="gotoRegister"/>
         </div>
       </div>
+      <change-password ref="changePassword"></change-password>
     </div>
+
   </div>
 </template>
 
 
 <script>
+import changePassword from "@/components/changePassword";
 import {login} from "@/api/api";
 
 export default {
   name: "login",
+  components: {changePassword},
   data() {
     return {
       background: {
@@ -108,6 +112,9 @@ export default {
     },
     gotoHomePage(){
       this.$router.push({ path: "/HomePage" });
+    },
+    changePassword(){
+      this.$refs.changePassword.open();
     }
   },
 }
@@ -116,14 +123,12 @@ export default {
 .bgBackground {
   background-size: 100% 100%;
   height: 98%;
-  position: fixed;
   width: 1520px;
 }
 
 .shadow {
   background-size: 100% 100%;
   height: 98%;
-  position: fixed;
   width: 1520px;
   background-color: rgba(67, 66, 66, 0.72);
 }

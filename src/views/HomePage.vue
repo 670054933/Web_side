@@ -1,5 +1,3 @@
-/* eslint-disable space-before-blocks */
-/* eslint-disable space-before-blocks */
 <template>
   <div :style="background" class="bgBackground">
     <div :style="backgroundshadow" class="shadow">
@@ -85,14 +83,12 @@ export default {
 .bgBackground {
   background-size: 100% 100%;
   height: 98%;
-  position: fixed;
   width: 1520px;
   //width: 100%;
 }
 .shadow {
   background-size: 100% 100%;
   height: 98%;
-  position: fixed;
   width: 1520px;
   //width: 100%;
   background-color: rgba(67, 66, 66, 0.72);

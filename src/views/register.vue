@@ -37,7 +37,7 @@
             <el-input v-model="form.email"/>
           </el-form-item>
           <el-form-item label="UserName" prop="userName">
-            <el-input v-model="form.userName"/>
+            <el-input v-model="form.username"/>
           </el-form-item>
           <el-row>
             <el-col span="12">
@@ -55,7 +55,7 @@
             </el-col>
             <el-col span="12">
               <el-form-item label="Class" prop="classNo">
-                <el-select v-model="form.classNO" placeholder="class" clearable filterable
+                <el-select v-model="form.classNo" placeholder="class" clearable filterable
                            style="margin-right: 15px">
                   <el-option label="Class1" value="1"></el-option>
                   <el-option label="Class2" value="2"></el-option>
@@ -104,7 +104,7 @@ export default {
     };
     var checkName = (rule, value, cb) => {
       // 验证名字的正则表达式
-      const regName = /^([a-zA-Z0-9_-])+/;
+      const regName = /^([a-zA-Z0-9_-]*)+/;
       if (regName.test(value)) {
         // 合法的用户名
         return cb();
@@ -112,7 +112,7 @@ export default {
       cb(new Error("Please enter a valid user name"));
     };
     var checkPass = (rule, value, cb) => {
-      const regPass = /^([a-zA-Z0-9_-])+/;
+      const regPass = /^([a-zA-Z0-9_-]*)+/;
       if (value === "") {
         cb(new Error("请再次输入密码"));
       } else if (value !== this.form.password) {
@@ -123,28 +123,28 @@ export default {
     };
     return {
       form: {
-        username: "",
-        password: "",
-        subject: '',
-        email: "",
-        classNO: ''
+        username: 'zxx12138',
+        password: '123qwe',
+        subject: 'chinese',
+        email: '670054933@qq.com',
+        classNo: '1'
       },
-      Cpassword: "",
+      Cpassword: '123qwe',
       Subjects: [
         {
-          value: "chinese",
-          label: "Chinese",
+          value: 'chinese',
+          label: 'Chinese',
         },
         {
-          value: "math",
+          value: 'math',
           label: "Maths",
         },
         {
-          value: "english",
+          value: 'english',
           label: "English",
         },
         {
-          value: "chemistry",
+          value: 'chemistry',
           label: "Chemistry",
         },
         {
@@ -234,11 +234,22 @@ export default {
     },
     submitForm(param) {
       param = {
-        ...this.submitForm
+        ...this.form
       }
-
       register(param).then(res => {
         console.log(res.data)
+        if (res.data.code === 0){
+          this.$message({
+            message: res.data.msg,
+            type: 'success'
+          })
+          this.gotoLogin();
+        }else {
+          this.$message({
+            message: res.data.msg,
+            type: 'warning'
+          })
+        }
 
       })
     },
@@ -249,13 +260,11 @@ export default {
 .bgBackground {
   background-size: 100% 100%;
   height: 98%;
-  position: fixed;
   width: 1520px;
 
   .shadow {
     background-size: 100% 100%;
     height: 98%;
-    position: fixed;
     width: 1520px;
     background-color: rgba(67, 66, 66, 0.72);
   }
