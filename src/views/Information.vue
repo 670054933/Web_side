@@ -35,7 +35,7 @@
 <script>
 import Theme from "@/components/Theme";
 import Headers from "@/components/Headers";
-import {gradeQuery} from "@/api/api";
+import {searchTeacher,editTeacher} from "@/api/api";
 
 export default {
   name: 'Information',
@@ -47,17 +47,14 @@ export default {
       isShow: true,
       isModified: true,
       //title数据
-      name: "Ann",
-      post: "Head teacher",
-      classtaught: "Class 11, Class 12",
+      name: '',
+      post: '',
+      classtaught: '',
 
       //表单数据
       form: {
-        phoneNO: '',
         email: '',
         subject: '',
-        profession: '',
-        desc: '',
       },
     }
   },
@@ -80,7 +77,22 @@ export default {
       })
       this.isModified = true;
     },
+    searchTeacher(param){
+      param = {
+        name: this.name
+      }
+      searchTeacher(param).then(res =>{
+        console.log(res)
+      })
+    },
+    edutTeacher(){
+
+    }
   },
+  mounted() {
+    this.name = this.$store.state.user
+    this.searchTeacher()
+  }
 }
 ;
 </script>

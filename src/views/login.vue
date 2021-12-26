@@ -66,8 +66,8 @@ export default {
         isBtnLoading: false,
       },
       form: {
-        email: '',
-        password: '',
+        email: 'Field@education.com',
+        password: '933483',
       },
       head: {
         activeIndex: "1",
@@ -84,15 +84,15 @@ export default {
         ...this.form
       }
       login(param).then(res => {
-        console.log(res)
         if (res.data.code === 0) {
-          this.$store.commit('SET_TOKEN', res.data.tokenValue)
-          this.$store.commit('GET_USER', res.data.username)
+          this.$store.commit('SET_TOKEN', res.data.data.tokenValue)
+          this.$store.commit('GET_USER', res.data.data.username)
           this.$message({
             message: res.data.msg,
             type: 'success'
           })
           this.$router.push({name: 'Home'})
+
         }else {
           this.$message({
             message: res.data.msg,

@@ -7,6 +7,8 @@ const api ={
     login:'/login',
     register:'/register',
     querySfromC:'/AllStudentFromClass',
+    queryTeacher:'/searchTeacher',
+    editTeacher:'/changeTeacherInfo',
 }
 
 export function queryStudent(param){
@@ -54,5 +56,21 @@ export function querySfromC(param){
         url:api.querySfromC,
         method:'post',
         data:param
+    })
+}
+
+export function searchTeacher(param) {
+    return service({
+        url: api.queryTeacher,
+        method: 'post',
+        data: param
+    })
+}
+
+export function editTeacher(param) {
+    return service({
+        url: api.editTeacher,
+        method: 'post',
+        data: param
     })
 }
